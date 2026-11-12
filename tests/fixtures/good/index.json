@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "research": {
+    "id": "RES-001",
+    "question": "Why did the ministry delay the grid programme, and what would change its position?",
+    "as_of": "2026-10-01",
+    "decision_context": "Fixture only: exercises the state contract without asserting anything about the world.",
+    "scope_in": ["fiscal year 2026", "programme approvals"],
+    "scope_out": ["regional grid operators"],
+    "scale": "lean",
+    "seats": { "actors": 2, "evidence": 0, "red_team": 1, "synthesis": 0 }
+  },
+  "fact_snapshot": {
+    "version": 1,
+    "ids": ["FACT-001", "FACT-002"],
+    "hash": "fixturehash0000000000000000000000",
+    "frozen_at": "2026-10-02T09:00:00Z"
+  },
+  "prediction_set": {
+    "ids": ["PRD-001", "PRD-002"],
+    "registered_at": "2026-10-02T10:00:00Z"
+  },
+  "actor_set": {
+    "ids": ["ACT-001", "ACT-002"],
+    "runs": [
+      { "actor": "ACT-001", "execution_unit": "unit-a", "simulation_input_hash": "hash-a" },
+      { "actor": "ACT-002", "execution_unit": "unit-b", "simulation_input_hash": "hash-b" }
+    ]
+  },
+  "counters": {
+    "runs": 3,
+    "queries": 12,
+    "rounds": 1,
+    "runs_max": 13,
+    "queries_max": 120,
+    "rounds_max": 3,
+    "degradation_level": "L0",
+    "wall_started_at": "2026-10-02T08:50:00Z"
+  },
+  "registries": {
+    "FACT-001": "Programme requires co-signature by the finance ministry",
+    "HYP-001": "Delay reflects a fiscal veto, not technical difficulty"
+  }
+}

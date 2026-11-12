@@ -1,0 +1,23 @@
+{
+  "id": "PRD-002",
+  "hypothesis": "HYP-001",
+  "observable": "Any binding external customer commitment for 18A/14A volume tied to a European site.",
+  "indicator": "Named customer announcements with volume or capacity terms",
+  "window": {
+    "from": "2024-09-16",
+    "to": "2025-07-25"
+  },
+  "confirm_if": "No such commitment announced in the window",
+  "disconfirm_if": "A named anchor customer with European volume terms announced before the cancellation",
+  "counter_indicator": "Intel citing a European customer as the reason to revisit the site",
+  "separates": [
+    [
+      "HYP-001",
+      "HYP-003"
+    ]
+  ],
+  "strength": "moderate",
+  "registered_at": "2026-11-13T02:11:00Z",
+  "late": false,
+  "judgement": "pending"
+}

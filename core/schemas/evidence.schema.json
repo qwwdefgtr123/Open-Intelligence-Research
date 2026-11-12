@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/evidence.schema.json",
+  "title": "OIR evidence record",
+  "description": "Material bearing on named hypotheses. Requires at least one alternative reading and a numeric effective-independent-source count. A record with one reading is a quotation, not an evaluation.",
+  "type": "object",
+  "required": ["id", "description", "source", "direction", "targets", "strength", "independence_note", "alternative_readings", "obtained_by"],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "pattern": "^EVD-[0-9]{3,}$" },
+    "description": {
+      "type": "string",
+      "minLength": 12,
+      "description": "What the material says, without interpretation."
+    },
+    "source": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^SRC-[0-9]{3,}$" }
+    },
+    "direction": { "type": "string", "enum": ["supports", "undermines", "neutral"] },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["hypothesis", "weight"],
+        "additionalProperties": true,
+        "properties": {
+          "hypothesis": { "type": "string", "pattern": "^HYP-[0-9]{3,}$" },
+          "weight": { "type": "string", "enum": ["decisive", "strong", "weak"] }
+        }
+      }
+    },
+    "strength": { "type": "string", "enum": ["strong", "moderate", "weak"] },
+    "independence_note": {
+      "type": "object",
+      "required": ["effective_independent", "reasoning"],
+      "additionalProperties": true,
+      "properties": {
+        "effective_independent": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of distinct ROOT sources, not URLs and not outlets."
+        },
+        "reasoning": { "type": "string", "minLength": 12 },
+        "redundant": {
+          "type": "boolean",
+          "description": "True when this record adds no independence over one already counted."
+        },
+        "root_unknown": { "type": "boolean" }
+      }
+    },
+    "alternative_readings": {
+      "type": "array",
+      "minItems": 1,
+      "description": "At least one other explanation of the same material. This is the quality control on interpretation.",
+      "items": { "type": "string" }
+    },
+    "obtained_by": { "type": "string", "pattern": "^INV-[0-9]{3,}$" },
+    "claim_refs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^CLM-[0-9]{3,}$" }
+    },
+    "obtained_at": { "type": "string" },
+    "contradicts_fact": {
+      "type": "string",
+      "pattern": "^FACT-[0-9]{3,}$",
+      "description": "Set when this evidence conflicts with a frozen fact. Triggers a fact-revision decision rather than a silent overwrite."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "HYP-001",
+  "statement": "Intel paused in 2024 and cancelled in 2025 because European greenfield capacity had become an option it could no longer fund, and unfunded sites ranked last under a cash-gated capital rule.",
+  "mechanism": "The 2024 loss and the USD 10bn savings target broke Intel's capacity to carry new fixed commitments (FACT-005). Capital was therefore allocated by sunk-cost asymmetry: Arizona, Oregon, New Mexico and Ohio already had money in the ground and political weight, while Magdeburg had neither (FACT-001). Under that rule the European site is not rejected on merit but deferred indefinitely, because deferral costs almost nothing and commitment costs tens of billions. When a new CEO formalised the rule as 'capacity follows contracted demand' in 2025, the deferral became a cancellation (FACT-003). Weakest link: the assumption that Magdeburg carried no sunk cost of its own - if site preparation and supplier commitments were substantial, deferral was not cheap and the ranking logic weakens.",
+  "scope": {
+    "where": "Intel capital allocation across US, Ireland, Poland and Germany",
+    "when": "2024-09 to 2025-07",
+    "excludes": [
+      "post-2025 decisions at other sites"
+    ]
+  },
+  "premises": [
+    "FACT-001",
+    "FACT-003",
+    "FACT-005"
+  ],
+  "assumptions": [],
+  "predictions": [
+    "PRD-001",
+    "PRD-002"
+  ],
+  "supporting": [],
+  "undermining": [],
+  "relation_to_others": [
+    {
+      "hypothesis": "HYP-003",
+      "relation": "overlaps",
+      "note": "Both are necessary: no demand makes the option worthless, no cash makes it unaffordable"
+    },
+    {
+      "hypothesis": "HYP-004",
+      "relation": "contradicts",
+      "note": "HYP-004 says the constraint was geographic, not fiscal; they predict different capex totals"
+    },
+    {
+      "hypothesis": "HYP-005",
+      "relation": "overlaps",
+      "note": "Aid design raised the cost of deferral, reinforcing this mechanism"
+    }
+  ],
+  "status": "live",
+  "origin": "actor-model",
+  "created_at": "2026-11-13T02:05:00Z"
+}

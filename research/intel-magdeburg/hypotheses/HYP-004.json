@@ -1,0 +1,29 @@
+{
+  "id": "HYP-004",
+  "statement": "The cut was geographic rather than fiscal: Intel protected its US sites for political and CHIPS-related reasons and used demand language to justify a choice it had already made.",
+  "mechanism": "US sites carry a state shareholder relationship, CHIPS awards and congressional attention that Germany cannot match. A firm that must choose where to concentrate scarce capacity will concentrate it where the political cost of withdrawal is highest. 'Anticipated market demand' is then a face-saving formulation covering a decision taken on political grounds, which explains why the 2024 formulation was 'pause' - a word that defers blame - rather than 'cancel'. Weakest link: if US sites were slowed on the same demand grounds in the same window, the geographic story loses its distinctive prediction.",
+  "scope": {
+    "where": "Intel's site portfolio",
+    "when": "2024-09 to 2025-07"
+  },
+  "premises": [
+    "FACT-001",
+    "FACT-005"
+  ],
+  "assumptions": [],
+  "predictions": [
+    "PRD-005"
+  ],
+  "supporting": [],
+  "undermining": [],
+  "relation_to_others": [
+    {
+      "hypothesis": "HYP-001",
+      "relation": "contradicts",
+      "note": "Fiscal versus geographic constraint; separable via total capex and US site pacing"
+    }
+  ],
+  "status": "live",
+  "origin": "documented-interpretation",
+  "created_at": "2026-11-13T02:08:00Z"
+}

@@ -1,0 +1,208 @@
+{
+  "id": "ACT-003",
+  "identity": {
+    "name": "Saxony-Anhalt state government and city of Magdeburg (site government)",
+    "type": "government_body",
+    "level": "composite"
+  },
+  "goals": [
+    {
+      "goal": "Secure a ~3,000-job anchor on the cleared Eulenberg site, Intel or equivalent",
+      "priority": 1
+    },
+    {
+      "goal": "Shift the political cost of the empty field upward to Berlin and Brussels",
+      "priority": 2
+    },
+    {
+      "goal": "Preserve the 2022 promise as still-live rather than broken",
+      "priority": 3
+    }
+  ],
+  "fears": [
+    "The field stays visibly empty through an electoral cycle and the state owns the failure alone",
+    "Berlin absorbs the EUR 9.9bn back into the general budget, removing the state's only external lever",
+    "Being forced to declare the project dead and thereby validate a deindustrialisation narrative"
+  ],
+  "factions": [
+    {
+      "name": "State government",
+      "weight": 0.3,
+      "goal": "A headline that survives an election; land and permits as leverage on Berlin",
+      "can_veto": true,
+      "veto_scope": "land use and state-level incentives"
+    },
+    {
+      "name": "City of Magdeburg",
+      "weight": 0.25,
+      "goal": "Speed and any jobs; bears the visible-empty-field cost most directly",
+      "can_veto": true,
+      "veto_scope": "building permits and local plans, by delay"
+    },
+    {
+      "name": "Local business chamber / supplier base",
+      "weight": 0.2,
+      "goal": "Orders in the near term, not 2028; may prefer a smaller faster tenant",
+      "can_veto": false
+    },
+    {
+      "name": "Public",
+      "weight": 0.25,
+      "goal": "Promise kept, no new risk",
+      "can_veto": true,
+      "veto_scope": "the government, via elections"
+    }
+  ],
+  "decision_rule": "Never be the actor that declares the project over: hold the site warm, keep the pause framing, and push the cost of emptiness upward until a tenant or an election forces a redefinition.",
+  "resources": [
+    {
+      "resource": "Land, remediation and permitting pace",
+      "kind": "legal",
+      "magnitude": "full within state competence"
+    },
+    {
+      "resource": "Vocational training and state-level supplier incentives",
+      "kind": "financial",
+      "magnitude": "limited"
+    },
+    {
+      "resource": "Lobbying access to Berlin and Brussels",
+      "kind": "relational",
+      "magnitude": "moderate"
+    }
+  ],
+  "constraints": [
+    {
+      "constraint": "EUR 9.9bn subsidy is federal, not state, and was approved for the Intel project",
+      "kind": "fiscal",
+      "source": "FACT-002",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "No authority over Intel's capital allocation",
+      "kind": "other",
+      "source": "FACT-003",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "Intel cancelled, not paused, the project in July 2025",
+      "kind": "other",
+      "source": "FACT-003",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "State cannot substitute EUR 30bn of private capex",
+      "kind": "fiscal",
+      "source": "FACT-002",
+      "hardness": "hard"
+    }
+  ],
+  "risk_tolerance": "moderate",
+  "options": [
+    {
+      "action": "Keep the Intel option alive at near-zero cost; retain land, refuse cancelled language",
+      "feasibility": "high"
+    },
+    {
+      "action": "Lobby Berlin to convert the 9.9bn into a site-level instrument open to any qualified investor",
+      "feasibility": "low"
+    },
+    {
+      "action": "Court an alternative anchor tenant at smaller scale",
+      "feasibility": "medium"
+    },
+    {
+      "action": "Pre-emptively reframe the site as a multi-use technology park",
+      "feasibility": "high"
+    },
+    {
+      "action": "Escalate publicly against Berlin over the returned subsidy",
+      "feasibility": "high"
+    }
+  ],
+  "ruled_out": [
+    {
+      "action": "Sue Intel",
+      "reason": "No enforceable claim in the fact base; would freeze the residual option"
+    },
+    {
+      "action": "State-finance a replacement fab",
+      "reason": "EUR 30bn scale is beyond any state budget"
+    },
+    {
+      "action": "Demand a binding Intel timetable",
+      "reason": "No jurisdiction over capital allocation"
+    },
+    {
+      "action": "Speculative construction to force a decision",
+      "reason": "Converts a political cost into a fiscal one with no tenant in sight"
+    }
+  ],
+  "reaction_function": [
+    {
+      "if": "Berlin moves to return the EUR 9.9bn to the general budget",
+      "then": "The state escalates publicly, reframes it as a breach of the 2022 eastern commitment, and demands a site-specific successor instrument",
+      "because": "The subsidy is its only external lever"
+    },
+    {
+      "if": "Intel retains any residual presence or land option",
+      "then": "The state amplifies it and refuses to declare the project dead",
+      "because": "Cancelled language assigns the failure locally"
+    },
+    {
+      "if": "A credible mid-size tenant appears",
+      "then": "The state trades scale for speed, if it can be announced before the electoral cycle",
+      "because": "Any anchor beats an empty field"
+    },
+    {
+      "if": "No tenant by mid-2027",
+      "then": "The state pivots to a multi-use technology-park narrative",
+      "because": "Whoever names the empty field first controls the story"
+    }
+  ],
+  "beliefs_about": [
+    {
+      "about": "the site",
+      "order": 0,
+      "belief": "A perishable asset; every month empty lowers its price and political value",
+      "confidence": "high"
+    },
+    {
+      "about": "Intel",
+      "order": 1,
+      "belief": "Intel will not return; the customer-commitment logic is structural and Germany is its worst cost base",
+      "confidence": "moderate"
+    },
+    {
+      "about": "Intel's view of the state",
+      "order": 2,
+      "belief": "Intel believes the state has no alternative and will keep the site warm, so waiting costs Intel nothing",
+      "confidence": "low"
+    }
+  ],
+  "falsifiers": [
+    "Any real Intel capital commitment to Magdeburg after October 2025",
+    "The EUR 9.9bn formally repurposed into a site fund open to any investor",
+    "A signed alternative anchor tenant of 1,000+ jobs",
+    "The state publicly declaring the project terminated"
+  ],
+  "premises": [
+    "FACT-001",
+    "FACT-002",
+    "FACT-003",
+    "FACT-004",
+    "FACT-005"
+  ],
+  "premises_missing": [
+    "The state's contractual or land-option terms with Intel",
+    "Whether the Commission's aid approval is project-specific and revocable",
+    "Site area, remediation status and carrying cost",
+    "The state electoral calendar",
+    "Any public statement by the state government - none in the fact base",
+    "Supplier count and employment exposure"
+  ],
+  "version": 1,
+  "change_log": [],
+  "stale": false,
+  "simulation_ref": "simulations/SIM-ACT-003-r1.md"
+}

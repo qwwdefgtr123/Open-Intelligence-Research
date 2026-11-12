@@ -1,0 +1,34 @@
+{
+  "id": "HYP-002",
+  "statement": "The outcome was settled in Berlin's budget line rather than in Intel's plans: the EUR 9.9bn was an earmark the finance ministry always intended to reclaim, so the project lost its political sponsor within weeks of the pause.",
+  "mechanism": "The aid was a project-specific earmark inside an off-budget vehicle whose legal basis had already been narrowed (FACT-002, FACT-004). For the finance ministry the earmark is a liability with no upside once the project freezes; for the economy ministry it is the only leading-edge anchor. The two ministries hold compatible vetoes on different questions - cash versus programme design - and when a frozen project competes with a budget gap the gap wins (FACT-004). Therefore the political sponsor disappears before Intel's 2025 decision, and the cancellation ratifies a fiscal outcome rather than causing it. Weakest link: the claim that the finance ministry's preference was decisive rather than merely vocal; FACT-004 is single-source and reports a dispute, not its resolution.",
+  "scope": {
+    "where": "German federal budget and the Climate and Transformation Fund vehicle",
+    "when": "2024-09 to 2025-07"
+  },
+  "premises": [
+    "FACT-002",
+    "FACT-004"
+  ],
+  "assumptions": [],
+  "predictions": [
+    "PRD-003"
+  ],
+  "supporting": [],
+  "undermining": [],
+  "relation_to_others": [
+    {
+      "hypothesis": "HYP-001",
+      "relation": "overlaps",
+      "note": "Compatible: Intel's cash constraint and Berlin's reclamation both push the same way"
+    },
+    {
+      "hypothesis": "HYP-003",
+      "relation": "independent",
+      "note": "Different causal layer; both can hold"
+    }
+  ],
+  "status": "live",
+  "origin": "actor-model",
+  "created_at": "2026-11-13T02:06:00Z"
+}

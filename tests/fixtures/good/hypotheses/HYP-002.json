@@ -1,0 +1,22 @@
+{
+  "id": "HYP-002",
+  "statement": "The delay reflects limited technical review capacity inside the sponsoring body rather than a fiscal objection.",
+  "mechanism": "The sponsoring body's legal affairs unit must clear the submission before co-signature is sought; that unit is small and carries a queue of unrelated approvals; therefore the submission reaches the ministry late, and the delay is procedural capacity rather than fiscal resistance.",
+  "scope": {
+    "where": "sponsoring body internal process",
+    "when": "fiscal year 2026"
+  },
+  "premises": ["FACT-001"],
+  "assumptions": [],
+  "predictions": ["PRD-002"],
+  "supporting": [],
+  "undermining": ["EVD-001"],
+  "relation_to_others": [
+    { "hypothesis": "HYP-001", "relation": "contradicts", "note": "Different cause, same observable delay" }
+  ],
+  "status": "weakened",
+  "status_reason": "EVD-001 shows the submission reached the ministry on time, which the capacity mechanism does not predict.",
+  "survived": [],
+  "origin": "adjudicated-interaction",
+  "created_at": "2026-10-02T10:07:00Z"
+}

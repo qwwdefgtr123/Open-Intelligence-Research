@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "note": "Single source of truth for platform distributions. `python packaging/build.py` stamps packaging/skill.template.md into distributions/<id>/skills/<skill>/. Never hand-edit a generated SKILL.md; edit the template or this file, then rebuild.",
+  "skill": {
+    "name": "oir",
+    "version": "0.1.0",
+    "upstream": "Open-Intelligence-Research",
+    "description": "Run a closed-loop research method for questions where several parties hold conflicting interests and public material supports more than one explanation. Builds a verified fact base, models each party in an isolated seat, generates competing hypotheses with pre-registered predictions, investigates only evidence that separates them, runs a blind adversarial review, and updates its own state until a stop rule fires. Use when the user asks why an actor behaved as it did, what a government or firm will do next, which reading of a contested situation holds up, or asks for a multi-perspective, red-team or competing-hypotheses analysis. Not for factual lookups, single-party questions, or plain summarisation.",
+    "core_root": "the repository root containing core/ - resolve it from the skill's own location, or from the installed copy if the repository was cloned alongside"
+  },
+  "platforms": [
+    {
+      "id": "workbuddy",
+      "display": "WorkBuddy",
+      "compatibility": "Requires filesystem read/write and a subagent dispatch mechanism. Primary target.",
+      "verified": "2026-11-13",
+      "verification": "Installed and executed on the authoring machine. Skill directory scanning, frontmatter parsing and subagent dispatch confirmed in-session.",
+      "install": [
+        { "scope": "user", "path": "~/.workbuddy/skills/oir/", "windows": "C:/Users/<user>/.workbuddy/skills/oir/" },
+        { "scope": "project", "path": "<workspace>/.workbuddy/skills/oir/" }
+      ],
+      "dispatch": "Dispatch each actor seat with the agent/subagent mechanism available in this environment, one fresh unit per seat, passing only the frozen fact snapshot, the actor brief and the schema. Do not run two actors in one context. Record each unit's identifier and an input hash in index.json so the isolation check can verify them.",
+      "notes": "Directory name must equal the skill name. A new session is required before the description enters context."
+    },
+    {
+      "id": "claude-code",
+      "display": "Claude Code",
+      "compatibility": "Requires filesystem access and the Task tool for isolated subagents.",
+      "verified": "2026-11-13",
+      "verification": "Paths and frontmatter rules read from the vendor documentation page code.claude.com/docs/en/skills on 2026-11-13. Not executed in this repository's test run.",
+      "install": [
+        { "scope": "user", "path": "~/.claude/skills/oir/" },
+        { "scope": "project", "path": ".claude/skills/oir/" }
+      ],
+      "dispatch": "Use the Task tool with a general-purpose subagent, one invocation per actor seat. Each invocation receives only the frozen fact snapshot, the actor brief and the schema. Record the task identifier and an input hash in index.json. For a single-seat run at depth, `context: fork` in frontmatter runs the whole skill in a forked subagent.",
+      "notes": "Only spec fields (name, description, license, compatibility, metadata, allowed-tools) survive cross-tool packaging; extra fields hard-error in that path. Keep SKILL.md under 500 lines."
+    },
+    {
+      "id": "agents-skills",
+      "display": "Portable .agents/skills (Codex CLI, Cursor, Gemini CLI alias)",
+      "compatibility": "Requires filesystem access and a subagent or parallel-process mechanism.",
+      "verified": "partially",
+      "verification": "Gemini CLI discovery paths read from vendor documentation (geminicli.com/docs/cli/skills) on 2026-11-13. Codex paths come from third-party summaries only: the vendor page returned HTTP 403 at verification time, so the Codex rows below are marked unverified.",
+      "install": [
+        { "scope": "user", "path": "~/.agents/skills/oir/" },
+        { "scope": "project", "path": ".agents/skills/oir/" },
+        { "scope": "gemini-user", "path": "~/.gemini/skills/oir/" },
+        { "scope": "codex-user", "path": "$HOME/.agents/skills/oir/ (unverified)" }
+      ],
+      "dispatch": "There is no shared subagent API across these runners. Use whichever the host provides: a subtask tool, a second process invocation, or one CLI call per seat with the actor brief in a file. If the host cannot isolate, do not fake it - say that viewpoint diversity is unavailable and the run is single-perspective.",
+      "notes": "This is the lowest-common-denominator package. Use it when the host is not WorkBuddy or Claude Code."
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "id": "ACT-001",
+  "identity": {
+    "name": "Intel executive leadership (CEO and capital-allocation officers), 2024-2025",
+    "type": "firm",
+    "level": "composite"
+  },
+  "goals": [
+    {
+      "goal": "Preserve leading-edge manufacturing capability while ending the cash burn",
+      "priority": 1
+    },
+    {
+      "goal": "Convert fixed capital obligations into variable ones until external foundry demand is contracted",
+      "priority": 2
+    },
+    {
+      "goal": "Protect the balance sheet from a second shock that would foreclose the manufacturing strategy",
+      "priority": 3
+    },
+    {
+      "goal": "Keep Foundry financeable as a separate entity rather than a captive cost centre",
+      "priority": 4
+    }
+  ],
+  "fears": [
+    "Being contractually bound to spend tens of billions on capacity with no buyer (FACT-003)",
+    "Irreversibility: commitments that cannot be unwound when demand does not arrive",
+    "A second loss event on the scale of Q3 2024 forcing retreat from manufacturing altogether (FACT-005)",
+    "Being read in Berlin and Brussels as an unreliable partner"
+  ],
+  "factions": [
+    {
+      "name": "Technology / foundry bloc",
+      "weight": 0.25,
+      "goal": "Build capacity ahead of demand; commitments follow a credible roadmap",
+      "can_veto": true,
+      "veto_scope": "can declare a node not ready, which blocks any fab decision"
+    },
+    {
+      "name": "Finance and treasury",
+      "weight": 0.35,
+      "goal": "Gate every commitment; rank by sunk-cost asymmetry and cash payback",
+      "can_veto": true,
+      "veto_scope": "any commitment above threshold"
+    },
+    {
+      "name": "Product / client CPU bloc",
+      "weight": 0.2,
+      "goal": "Return cash to product lines; treat foundry capex as a drag",
+      "can_veto": false
+    },
+    {
+      "name": "Board of directors",
+      "weight": 0.2,
+      "goal": "No second balance-sheet shock; protect state and CHIPS relationships",
+      "can_veto": true,
+      "veto_scope": "any irreversible capital commitment"
+    }
+  ],
+  "decision_rule": "No new greenfield wafer capacity without binding external customer commitments covering most of output; irreversible commitments require board sign-off and are ranked by sunk-cost asymmetry, so funded and politically load-bearing US sites go first and unfunded EU sites last.",
+  "resources": [
+    {
+      "resource": "Sunk US capacity (Arizona, Oregon, New Mexico, Ohio)",
+      "kind": "financial",
+      "magnitude": "substantial"
+    },
+    {
+      "resource": "Irish fab",
+      "kind": "financial",
+      "magnitude": "operating"
+    },
+    {
+      "resource": "German aid package (~EUR 9.9bn)",
+      "kind": "relational",
+      "magnitude": "conditional, not Intel's money"
+    },
+    {
+      "resource": "Paused Magdeburg site as an option",
+      "kind": "relational",
+      "magnitude": "low carrying cost, high political cost"
+    }
+  ],
+  "constraints": [
+    {
+      "constraint": "Cash position and loss trajectory prohibit new multi-billion fixed commitments",
+      "kind": "fiscal",
+      "source": "FACT-005",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "German aid is milestone- and site-conditioned; restart is a re-application, not a resumption",
+      "kind": "legal",
+      "source": "FACT-002",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "Land, utility and supplier commitments at Magdeburg carry exit cost",
+      "kind": "other",
+      "source": "FACT-002",
+      "hardness": "soft"
+    },
+    {
+      "constraint": "Cancellation damages credibility with the Commission and the federal government",
+      "kind": "reputational",
+      "source": "FACT-003",
+      "hardness": "soft"
+    },
+    {
+      "constraint": "US sites are already funded and politically load-bearing, so they outrank Germany",
+      "kind": "political",
+      "source": "FACT-001",
+      "hardness": "hard"
+    }
+  ],
+  "risk_tolerance": "low",
+  "options": [
+    {
+      "action": "Pause German and Polish projects by about two years (executed 2024-09)",
+      "feasibility": "high",
+      "requires": [
+        "FACT-001"
+      ]
+    },
+    {
+      "action": "Cancel both projects outright (executed 2025-07)",
+      "feasibility": "high",
+      "requires": [
+        "FACT-003"
+      ]
+    },
+    {
+      "action": "Retain the Magdeburg land and permits as a dormant option",
+      "feasibility": "high"
+    },
+    {
+      "action": "Offer advanced packaging or a later node instead of the announced wafer fab",
+      "feasibility": "medium"
+    },
+    {
+      "action": "Bring in a co-investor or JV partner for European capacity",
+      "feasibility": "low"
+    },
+    {
+      "action": "Separate Intel Foundry into an independent subsidiary to widen financing options",
+      "feasibility": "high",
+      "requires": [
+        "FACT-001"
+      ]
+    }
+  ],
+  "ruled_out": [
+    {
+      "action": "Build Magdeburg as announced for 2027-2028",
+      "reason": "No customer commitments to fill it; converts variable cost into fixed obligation at the worst point in the loss cycle"
+    },
+    {
+      "action": "Hold the option open indefinitely while signalling full commitment",
+      "reason": "Carries political expectation, audit scrutiny and land cost with no decision value"
+    },
+    {
+      "action": "Commit to any additional EU greenfield site",
+      "reason": "Same defect as Magdeburg; would forfeit the credibility of the demand-based rationale"
+    },
+    {
+      "action": "Pay the EUR 9.9bn back as a penalty framed as damages",
+      "reason": "Accepts a liability characterisation that invites further claims"
+    }
+  ],
+  "reaction_function": [
+    {
+      "if": "Berlin offers a larger aid package or an equity stake to keep the site alive",
+      "then": "Intel does not restart the wafer fab; it offers packaging or a later node and keeps the land",
+      "because": "The constraint is demand, not subsidy size"
+    },
+    {
+      "if": "Berlin demands return of the EUR 9.9bn",
+      "then": "Intel negotiates against documented sunk cost and refuses any payment characterised as damages",
+      "because": "Accepting a penalty framing invites further claims"
+    },
+    {
+      "if": "The Commission opens a state-aid recovery procedure",
+      "then": "Intel argues demand collapse rather than opportunism and settles rather than litigates",
+      "because": "Litigation is a distraction it cannot afford"
+    },
+    {
+      "if": "A lead external customer signs a binding 18A/14A volume commitment",
+      "then": "The constraint eases but Ohio and Arizona absorb the capacity first",
+      "because": "They are already funded"
+    }
+  ],
+  "beliefs_about": [
+    {
+      "about": "the situation",
+      "order": 0,
+      "belief": "External foundry demand never materialised at the scale the 2022 announcement assumed",
+      "confidence": "high"
+    },
+    {
+      "about": "German federal government",
+      "order": 1,
+      "belief": "Berlin will prioritise not appearing to have been taken in, and will convert the loss into a domestic political asset",
+      "confidence": "moderate"
+    },
+    {
+      "about": "German federal government's model of Intel",
+      "order": 2,
+      "belief": "Berlin reads the cancellation as a negotiating squeeze for more subsidy; that reading is wrong",
+      "confidence": "moderate"
+    }
+  ],
+  "falsifiers": [
+    "Intel recommits capital to Magdeburg, or to any new EU greenfield wafer fab, before 2027",
+    "Intel sustains Ohio and Arizona funding at planned pace while continuing to cite demand insufficiency",
+    "A binding large external foundry customer signs and Intel still declines to revisit European capacity"
+  ],
+  "premises": [
+    "FACT-001",
+    "FACT-002",
+    "FACT-003",
+    "FACT-004",
+    "FACT-005"
+  ],
+  "premises_missing": [
+    "Intel's actual capex commitments to Magdeburg at cancellation, and any contractual break cost",
+    "The aid agreement terms: clawback clauses, milestone definitions, whether the EUR 9.9bn was disbursed",
+    "Any US government equity or quasi-equity position in Intel during 2025",
+    "The share of 18A/14A capacity already contracted to external customers by mid-2025"
+  ],
+  "version": 1,
+  "change_log": [],
+  "stale": false,
+  "simulation_ref": "simulations/SIM-ACT-001-r1.md"
+}

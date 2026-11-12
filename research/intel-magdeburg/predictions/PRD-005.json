@@ -1,0 +1,23 @@
+{
+  "id": "PRD-005",
+  "hypothesis": "HYP-004",
+  "observable": "Progress at Intel's Ohio site in the same period the German site is cancelled.",
+  "indicator": "Construction milestones, tool move-in dates and local reporting",
+  "window": {
+    "from": "2024-09-16",
+    "to": "2026-12-31"
+  },
+  "confirm_if": "Ohio construction continues to schedule while Magdeburg is cancelled",
+  "disconfirm_if": "Ohio is delayed or slowed on the same demand grounds within the window",
+  "counter_indicator": "Intel publicly attributing the European cut to political rather than demand factors",
+  "separates": [
+    [
+      "HYP-004",
+      "HYP-001"
+    ]
+  ],
+  "strength": "strong",
+  "registered_at": "2026-11-13T02:14:00Z",
+  "late": false,
+  "judgement": "pending"
+}

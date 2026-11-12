@@ -1,0 +1,12 @@
+{
+  "id": "FACT-002",
+  "statement": "The ministry's published cost estimate exceeded the statutory ceiling for the programme.",
+  "kind": "figure",
+  "as_of": "2026-09-20",
+  "sources": ["SRC-002"],
+  "verification_level": "single-source",
+  "effective_independent": 1,
+  "contradicts": [],
+  "note": "Fixture fact. One origin only; would be flagged in a real run.",
+  "recorded_at": "2026-10-02T08:56:00Z"
+}

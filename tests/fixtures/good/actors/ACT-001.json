@@ -1,0 +1,53 @@
+{
+  "id": "ACT-001",
+  "identity": {
+    "name": "Finance ministry",
+    "type": "government_body",
+    "level": "composite"
+  },
+  "goals": [
+    { "goal": "Hold aggregate spending inside the statutory ceiling", "priority": 1, "horizon": "annual" },
+    { "goal": "Avoid being blamed for a programme failure", "priority": 2 }
+  ],
+  "fears": ["Losing the ceiling as a credible constraint on other programmes"],
+  "factions": [
+    { "name": "Budget directorate", "weight": 0.6, "goal": "Defend the ceiling", "can_veto": true, "veto_scope": "any new commitment above the ceiling" },
+    { "name": "Sector liaison unit", "weight": 0.4, "goal": "Keep the programme alive", "can_veto": false }
+  ],
+  "decision_rule": "The budget directorate prevails unless the ceiling itself is raised by legislation, in which case the liaison unit's preference carries.",
+  "resources": [
+    { "resource": "Co-signature authority", "kind": "legal", "magnitude": "full" },
+    { "resource": "Cost review staff", "kind": "informational", "magnitude": "limited" }
+  ],
+  "constraints": [
+    { "constraint": "Cannot approve a commitment above the ceiling", "kind": "legal", "source": "FACT-001", "hardness": "hard" },
+    { "constraint": "Cannot be seen to block infrastructure without a fiscal reason", "kind": "political", "source": "FACT-001", "hardness": "soft" }
+  ],
+  "risk_tolerance": "low",
+  "options": [
+    { "action": "Withhold co-signature until the cost estimate is revised", "feasibility": "high", "requires": ["FACT-001"] },
+    { "action": "Request a legislative increase to the ceiling", "feasibility": "low" }
+  ],
+  "ruled_out": [
+    { "action": "Approve above the ceiling anyway", "reason": "Would destroy the constraint it exists to defend" }
+  ],
+  "reaction_function": [
+    { "if": "The sponsoring body submits a revised estimate inside the ceiling", "then": "Co-signature is granted without further delay", "because": "The veto is fiscal, not substantive" },
+    { "if": "The sponsoring body escalates publicly", "then": "The ministry restates the ceiling rule and offers a phased schedule", "because": "It needs a fiscal justification on the record" }
+  ],
+  "beliefs_about": [
+    { "about": "the programme's true cost", "order": 0, "belief": "Above the ceiling and likely to rise" },
+    { "about": "PARTY-B", "order": 1, "belief": "Will revise the estimate rather than escalate, because escalation has failed before", "confidence": "moderate" },
+    { "about": "PARTY-B", "order": 2, "belief": "Believes the ministry is blocking for institutional reasons rather than fiscal ones", "confidence": "low" }
+  ],
+  "falsifiers": [
+    "A programme approved above the ceiling with ministry co-signature",
+    "A delay that continues after a revised estimate inside the ceiling is submitted"
+  ],
+  "premises": ["FACT-001", "FACT-002"],
+  "premises_missing": ["The ministry's internal cost review, which is not public"],
+  "version": 1,
+  "change_log": [],
+  "stale": false,
+  "simulation_ref": "simulations/SIM-ACT-001-r1.md"
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/source.schema.json",
+  "title": "OIR source",
+  "description": "A retrievable origin. `derived_from` is mandatory (may be empty) and is the mechanism that prevents syndicated copy from being counted as independent corroboration.",
+  "type": "object",
+  "required": ["id", "url", "publisher", "tier", "derived_from", "independence_class"],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "pattern": "^SRC-[0-9]{3,}$" },
+    "url": { "type": "string", "minLength": 8 },
+    "title": { "type": "string" },
+    "publisher": { "type": "string" },
+    "published_at": { "type": "string" },
+    "retrieved_at": { "type": "string" },
+    "language": { "type": "string" },
+    "tier": {
+      "type": "string",
+      "enum": ["primary", "official", "media", "ngo", "research", "social", "anonymous"],
+      "description": "Tiers are judged by different standards and are never pooled into one credibility score."
+    },
+    "derived_from": {
+      "type": "array",
+      "description": "Root sources this one reproduces, translates, or reports on. Empty array means this is a root. A cycle is a validation failure.",
+      "items": { "type": "string", "pattern": "^SRC-[0-9]{3,}$" }
+    },
+    "independence_class": {
+      "type": "string",
+      "enum": ["root", "derived", "unknown"],
+      "description": "root = contributes 1 to the effective independent count; derived = contributes 0; unknown = counted as 1 but flagged."
+    },
+    "interest_note": {
+      "type": "string",
+      "description": "Who benefits from this being believed. Required for official and social tiers; optional elsewhere."
+    },
+    "access": {
+      "type": "string",
+      "enum": ["open", "paywalled", "archive-only", "unreachable"],
+      "description": "unreachable sources may be cited as reported, never as verified."
+    },
+    "archive_url": { "type": "string" },
+    "quote": { "type": "string", "description": "Exact wording when a specific phrase is load-bearing." },
+    "notes": { "type": "string" }
+  }
+}

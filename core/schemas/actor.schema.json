@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/actor.schema.json",
+  "title": "OIR actor model",
+  "description": "A modelled party. This is an analytical instrument, not a claim about the party's real motives. `premises` must reference existing FACT or CLM ids; invented facts are a validation failure.",
+  "type": "object",
+  "required": [
+    "id", "identity", "goals", "fears", "factions", "resources", "constraints",
+    "options", "reaction_function", "beliefs_about", "falsifiers", "premises", "version"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "pattern": "^ACT-[0-9]{3,}$" },
+    "identity": {
+      "type": "object",
+      "required": ["name", "type"],
+      "additionalProperties": true,
+      "properties": {
+        "name": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["state", "government_body", "official", "firm", "business_unit", "organisation", "interest_group", "individual", "other"]
+        },
+        "level": {
+          "type": "string",
+          "enum": ["unitary", "composite"],
+          "description": "composite means internal factions materially affect the decision; unitary requires a written justification in `unity_note`."
+        },
+        "unity_note": { "type": "string" }
+      }
+    },
+    "goals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["goal", "priority"],
+        "additionalProperties": true,
+        "properties": {
+          "goal": { "type": "string" },
+          "priority": { "type": "integer", "minimum": 1 },
+          "horizon": { "type": "string" }
+        }
+      }
+    },
+    "fears": {
+      "type": "array",
+      "minItems": 1,
+      "description": "What this party is most afraid of losing. Required: an actor defined only by ambition is a caricature and predicts badly.",
+      "items": { "type": "string" }
+    },
+    "factions": {
+      "type": "array",
+      "description": "Internal components with divergent interests. An empty array requires `unity_note`.",
+      "items": {
+        "type": "object",
+        "required": ["name", "weight", "goal"],
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+          "goal": { "type": "string" },
+          "can_veto": { "type": "boolean" },
+          "veto_scope": { "type": "string" }
+        }
+      }
+    },
+    "decision_rule": {
+      "type": "string",
+      "description": "How the factions resolve into one action: who prevails under which conditions. Not a description of the actor's personality."
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["resource", "kind"],
+        "additionalProperties": true,
+        "properties": {
+          "resource": { "type": "string" },
+          "kind": { "type": "string", "enum": ["financial", "legal", "political", "military", "informational", "relational", "other"] },
+          "magnitude": { "type": "string" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "description": "Internal and external limits. Legal, fiscal, political, physical, reputational.",
+      "items": {
+        "type": "object",
+        "required": ["constraint", "kind", "source"],
+        "additionalProperties": true,
+        "properties": {
+          "constraint": { "type": "string" },
+          "kind": { "type": "string", "enum": ["legal", "fiscal", "political", "physical", "reputational", "internal", "other"] },
+          "source": { "type": "string", "pattern": "^(FACT|CLM)-[0-9]{3,}$" },
+          "hardness": { "type": "string", "enum": ["hard", "soft"] }
+        }
+      }
+    },
+    "risk_tolerance": { "type": "string", "enum": ["low", "moderate", "high", "situational"] },
+    "options": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Feasible actions available to this party.",
+      "items": {
+        "type": "object",
+        "required": ["action", "feasibility"],
+        "additionalProperties": true,
+        "properties": {
+          "action": { "type": "string" },
+          "feasibility": { "type": "string", "enum": ["high", "medium", "low"] },
+          "requires": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "ruled_out": {
+      "type": "array",
+      "description": "Options the party excludes, with reasons. Often more diagnostic than the chosen option.",
+      "items": {
+        "type": "object",
+        "required": ["action", "reason"],
+        "additionalProperties": true,
+        "properties": {
+          "action": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "reaction_function": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Conditional responses. A single dispositional sentence ('will respond firmly') does not satisfy this field.",
+      "items": {
+        "type": "object",
+        "required": ["if", "then"],
+        "additionalProperties": true,
+        "properties": {
+          "if": { "type": "string" },
+          "then": { "type": "string" },
+          "because": { "type": "string" }
+        }
+      }
+    },
+    "beliefs_about": {
+      "type": "array",
+      "description": "Nested beliefs. Order 0 = facts about the situation, 1 = what I think X will do, 2 = what I think X thinks I will do. Order 3+ is out of scope: unverifiable, and models produce rhetoric rather than reasoning there.",
+      "items": {
+        "type": "object",
+        "required": ["about", "order", "belief"],
+        "additionalProperties": true,
+        "properties": {
+          "about": { "type": "string" },
+          "order": { "type": "integer", "minimum": 0, "maximum": 2 },
+          "belief": { "type": "string" },
+          "confidence": { "type": "string", "enum": ["low", "moderate", "high"] }
+        }
+      }
+    },
+    "falsifiers": {
+      "type": "array",
+      "minItems": 2,
+      "description": "Observable developments that would show this model is wrong. Specific enough for a reader to check.",
+      "items": { "type": "string" }
+    },
+    "premises": {
+      "type": "array",
+      "description": "FACT or CLM ids this model rests on. Prose restatement of a fact without an id is a validation failure.",
+      "items": { "type": "string", "pattern": "^(FACT|CLM)-[0-9]{3,}$" }
+    },
+    "premises_missing": {
+      "type": "array",
+      "description": "What the model needs and the fact base does not contain. A well-formed gap is a valid and useful output.",
+      "items": { "type": "string" }
+    },
+    "version": { "type": "integer", "minimum": 1 },
+    "change_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["version", "change", "because"],
+        "additionalProperties": true,
+        "properties": {
+          "version": { "type": "integer" },
+          "change": { "type": "string" },
+          "because": { "type": "string", "description": "Entity ids or decision ids that forced the revision." },
+          "at": { "type": "string" }
+        }
+      }
+    },
+    "stale": {
+      "type": "boolean",
+      "description": "True when a fact revision or a disconfirmed prediction invalidated this model and it has not yet been re-derived."
+    },
+    "simulation_ref": { "type": "string", "description": "Path to the SIM prose file for this version." }
+  }
+}

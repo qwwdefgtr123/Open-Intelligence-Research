@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "research": {
+    "id": "RES-001",
+    "question": "Why did Intel pause the Magdeburg fab in September 2024 and cancel it entirely in July 2025, and what did each party's judgement rest on?",
+    "as_of": "2026-10-31",
+    "decision_context": "Test case for the A-vs-B comparison. Not commissioned by anyone; no decision depends on it.",
+    "scope_in": [
+      "Intel corporate decisions Sep 2024 - Jul 2025",
+      "German federal subsidy and budget politics",
+      "EU Chips Act framework"
+    ],
+    "scope_out": [
+      "US CHIPS Act award terms",
+      "Poland site economics",
+      "TSMC/ESMC capacity plans except as comparison"
+    ],
+    "scale": "standard",
+    "seats": {
+      "actors": 3,
+      "evidence": 1,
+      "red_team": 1,
+      "synthesis": 0
+    }
+  },
+  "fact_snapshot": {
+    "version": 1,
+    "ids": [
+      "FACT-001",
+      "FACT-002",
+      "FACT-003",
+      "FACT-004",
+      "FACT-005"
+    ],
+    "hash": "casehash-intel-magdeburg-v1",
+    "frozen_at": "2026-11-13T01:30:00Z"
+  },
+  "prediction_set": {
+    "ids": [
+      "PRD-001",
+      "PRD-002",
+      "PRD-003",
+      "PRD-004",
+      "PRD-005",
+      "PRD-006"
+    ],
+    "registered_at": "2026-11-13T02:15:00Z"
+  },
+  "actor_set": {
+    "ids": [
+      "ACT-001",
+      "ACT-002",
+      "ACT-003"
+    ],
+    "runs": [
+      {
+        "actor": "ACT-001",
+        "execution_unit": "seat-intel",
+        "simulation_input_hash": "5c07a3faceef05ea"
+      },
+      {
+        "actor": "ACT-002",
+        "execution_unit": "seat-germany",
+        "simulation_input_hash": "5b81d0c2231765a8"
+      },
+      {
+        "actor": "ACT-003",
+        "execution_unit": "seat-state",
+        "simulation_input_hash": "95c1aed1b85ab0d2"
+      }
+    ]
+  },
+  "counters": {
+    "runs": 4,
+    "queries": 6,
+    "rounds": 0,
+    "runs_max": 13,
+    "queries_max": 120,
+    "rounds_max": 2,
+    "degradation_level": "L0",
+    "wall_started_at": "2026-11-13T01:10:00Z"
+  },
+  "registries": {
+    "FACT-001": "Intel announced a ~2 year pause of Germany and Poland on 2024-09-16",
+    "FACT-002": "Magdeburg: EUR 30bn, 3,000 jobs, EUR 9.9bn German aid, 2027-28 target",
+    "FACT-003": "July 2025: projects cancelled outright; Tan cites insufficient customer commitments",
+    "FACT-004": "German coalition split over reclaiming the EUR 9.9bn",
+    "FACT-005": "2024: 15,000 cuts, USD 10bn savings target, shares halved",
+    "ACT-001": "Intel leadership: option value and cash discipline, not a demand forecast",
+    "ACT-002": "German federal government: BMF cash gate vs BMWK programme; the gap wins",
+    "ACT-003": "Saxony-Anhalt: keep the site warm, push the blame upward",
+    "HYP-001": "Intel paused in 2024 and cancelled in 2025 because European greenfield capacity had become an option it could no longer ",
+    "HYP-002": "The outcome was settled in Berlin's budget line rather than in Intel's plans: the EUR 9.9bn was an earmark the finance m",
+    "HYP-003": "European leading-edge foundry demand never existed at the scale assumed in 2022, so no feasible subsidy level would have",
+    "HYP-004": "The cut was geographic rather than fiscal: Intel protected its US sites for political and CHIPS-related reasons and used",
+    "HYP-005": "Because the aid was project- and site-specific, the 2024 pause was functionally a cancellation: restarting required a fr",
+    "PRD-001": "HYP-001 - Intel's consolidated capital expenditure in fiscal 2025 and 2026, and the geographic split",
+    "PRD-002": "HYP-001 - Any binding external customer commitment for 18A/14A volume tied to a European site.",
+    "PRD-003": "HYP-002 - The status of the EUR 9.9bn earmark in German federal budget documents after September 202",
+    "PRD-004": "HYP-003 - The process node of any new European logic fab announced by 2026-12, and whether any Europ",
+    "PRD-005": "HYP-004 - Progress at Intel's Ohio site in the same period the German site is cancelled.",
+    "PRD-006": "HYP-005 - Entries in the European Commission's state aid register concerning aid to Intel for Magdeb"
+  },
+  "created_at": "2026-11-13T01:10:00Z",
+  "updated_at": "2026-11-13T01:40:00Z"
+}

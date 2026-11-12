@@ -1,0 +1,14 @@
+{
+  "id": "SRC-002",
+  "url": "https://example.invalid/cost-estimate",
+  "title": "Cost estimate annex",
+  "publisher": "Fixture Ministry",
+  "published_at": "2026-09-20",
+  "retrieved_at": "2026-10-02",
+  "language": "en",
+  "tier": "official",
+  "derived_from": [],
+  "independence_class": "root",
+  "interest_note": "Fixture: the publishing body bears the cost, so it has an interest in the ceiling being raised.",
+  "access": "open"
+}

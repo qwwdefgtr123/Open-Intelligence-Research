@@ -1,0 +1,23 @@
+{
+  "id": "PRD-001",
+  "hypothesis": "HYP-001",
+  "observable": "Intel's consolidated capital expenditure in fiscal 2025 and 2026, and the geographic split of that spend.",
+  "indicator": "10-K and quarterly capex guidance, compared with the pre-2024 plan",
+  "window": {
+    "from": "2025-07-25",
+    "to": "2026-12-31"
+  },
+  "confirm_if": "Total capex flat or lower than the 2024 plan while US sites continue to receive construction spend",
+  "disconfirm_if": "Total capex raised materially while only the European site is cut",
+  "counter_indicator": "A capex increase earmarked for new greenfield capacity outside the US",
+  "separates": [
+    [
+      "HYP-001",
+      "HYP-004"
+    ]
+  ],
+  "strength": "strong",
+  "registered_at": "2026-11-13T02:10:00Z",
+  "late": false,
+  "judgement": "pending"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "FACT-001",
+  "statement": "The programme rules require co-signature by the finance ministry before implementation.",
+  "kind": "legal",
+  "as_of": "2026-09-15",
+  "sources": ["SRC-001"],
+  "verification_level": "confirmed",
+  "effective_independent": 1,
+  "contradicts": [],
+  "note": "Fixture fact. Primary document, single root.",
+  "recorded_at": "2026-10-02T08:55:00Z"
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/investigation.schema.json",
+  "title": "OIR investigation",
+  "description": "A targeted question that separates specific hypotheses. An investigation that cannot name the pair it separates is a topic search and is rejected at intake.",
+  "type": "object",
+  "required": ["id", "question", "separates", "expected_if", "method", "null_result", "status"],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "pattern": "^INV-[0-9]{3,}$" },
+    "question": {
+      "type": "string",
+      "minLength": 16,
+      "description": "A discriminating question with a locatable answer, not a topic."
+    },
+    "separates": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Hypothesis pairs this investigation can distinguish. Empty fails the admission test.",
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": { "type": "string", "pattern": "^HYP-[0-9]{3,}$" }
+      }
+    },
+    "expected_if": {
+      "type": "object",
+      "description": "Written BEFORE retrieval. Committing to what would surprise you is the anti-confirmation device.",
+      "required": ["first", "second"],
+      "additionalProperties": true,
+      "properties": {
+        "first": { "type": "string", "description": "What the world looks like if the first hypothesis of the pair holds." },
+        "second": { "type": "string", "description": "What it looks like if the second holds." }
+      }
+    },
+    "method": {
+      "type": "object",
+      "required": ["kind", "queries_planned"],
+      "additionalProperties": true,
+      "properties": {
+        "kind": { "type": "string", "enum": ["web-retrieval", "document-retrieval", "dataset-query", "record-lookup", "interview-request"] },
+        "queries_planned": { "type": "integer", "minimum": 1 },
+        "query_log": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "obtainability": { "type": "string", "enum": ["likely", "plausible", "unlikely"] },
+    "cost": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "rank_score": {
+      "type": "number",
+      "description": "Ordinal heuristic output: separable pairs x obtainability / cost. NOT a probability and never reported as one."
+    },
+    "null_result": {
+      "type": "boolean",
+      "description": "True when the investigation ran and found nothing. A finding, not a failure; prevents repeat searches and stops 'not found' becoming 'does not exist'."
+    },
+    "result_summary": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^EVD-[0-9]{3,}$" }
+    },
+    "status": { "type": "string", "enum": ["planned", "running", "done", "dropped", "blocked"] },
+    "dropped_reason": { "type": "string" },
+    "started_at": { "type": "string" },
+    "closed_at": { "type": "string" },
+    "round": { "type": "integer", "minimum": 1 }
+  }
+}

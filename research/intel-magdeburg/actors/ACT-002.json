@@ -1,0 +1,216 @@
+{
+  "id": "ACT-002",
+  "identity": {
+    "name": "German federal government 2024-2025 (composite: finance ministry BMF + economy ministry BMWK)",
+    "type": "government_body",
+    "level": "composite"
+  },
+  "goals": [
+    {
+      "goal": "BMF: convert the frozen Magdeburg earmark into consolidation headroom",
+      "priority": 1
+    },
+    {
+      "goal": "BMF: avoid any obligation that outlives Intel's willingness to build",
+      "priority": 2
+    },
+    {
+      "goal": "BMWK: retain a German leading-edge logic fab and its supplier ring",
+      "priority": 1
+    },
+    {
+      "goal": "BMWK: preserve the credibility of the German subsidy instrument",
+      "priority": 3
+    },
+    {
+      "goal": "Cabinet: avoid a public admission that the flagship industrial project failed",
+      "priority": 2
+    }
+  ],
+  "fears": [
+    "BMF: a legally binding, non-unwindable commitment sitting in a narrowed off-budget vehicle",
+    "BMF: a supplementary budget or a second budget hole",
+    "BMWK: Magdeburg read internationally as a bluff, repricing future German commitments",
+    "BMWK: loss of the only leading-edge logic anchor in the domestic ecosystem"
+  ],
+  "factions": [
+    {
+      "name": "Finance ministry (BMF)",
+      "weight": 0.45,
+      "goal": "Budget consolidation; protect the debt brake; reclaim earmarked funds",
+      "can_veto": true,
+      "veto_scope": "no federal euro leaves without its budget title"
+    },
+    {
+      "name": "Economy ministry (BMWK)",
+      "weight": 0.45,
+      "goal": "Industrial policy; keep the chip subsidy programme and its industrial line intact",
+      "can_veto": true,
+      "veto_scope": "can refuse to sign a reallocation out of its line"
+    },
+    {
+      "name": "Chancellery",
+      "weight": 0.1,
+      "goal": "Political damage control; keep the coalition intact",
+      "can_veto": true,
+      "veto_scope": "arbitrates only at high salience"
+    }
+  ],
+  "decision_rule": "No federal euro leaves without BMF's budget title; BMWK can block reallocation out of its line but cannot create headroom. When a frozen project competes with a budget gap, the gap wins unless the Chancellery spends political capital - and in 2024 it did not.",
+  "resources": [
+    {
+      "resource": "EUR 9.9bn earmark",
+      "kind": "financial",
+      "magnitude": "approved, project-specific"
+    },
+    {
+      "resource": "Signature, disbursement, public attribution",
+      "kind": "legal",
+      "magnitude": "full"
+    },
+    {
+      "resource": "Refusal to re-notify a re-scoped use",
+      "kind": "legal",
+      "magnitude": "full"
+    }
+  ],
+  "constraints": [
+    {
+      "constraint": "Aid is approved and sized at about EUR 9.9bn for this site",
+      "kind": "fiscal",
+      "source": "FACT-002",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "Aid is project- and site-specific; re-scoping needs fresh Commission notification",
+      "kind": "legal",
+      "source": "FACT-002",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "Funds sit in a specific off-budget vehicle already narrowed by a constitutional court ruling",
+      "kind": "legal",
+      "source": "FACT-004",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "Saxony-Anhalt holds its own stake and its own fiscal claim on the site",
+      "kind": "other",
+      "source": "FACT-002",
+      "hardness": "soft"
+    },
+    {
+      "constraint": "Intel's stated stop reason was market demand, not subsidy size",
+      "kind": "other",
+      "source": "FACT-001",
+      "hardness": "hard"
+    },
+    {
+      "constraint": "Intel's cancellation was driven by insufficient customer commitments",
+      "kind": "other",
+      "source": "FACT-003",
+      "hardness": "hard"
+    }
+  ],
+  "risk_tolerance": "low",
+  "options": [
+    {
+      "action": "Hold the EUR 9.9bn earmark and wait for Intel to recommit",
+      "feasibility": "medium"
+    },
+    {
+      "action": "De-commit the earmark back into consolidation",
+      "feasibility": "high"
+    },
+    {
+      "action": "Re-scope the aid to another project after a new state-aid notification",
+      "feasibility": "medium"
+    },
+    {
+      "action": "Convert the envelope into supplier and design-ecosystem support",
+      "feasibility": "medium"
+    },
+    {
+      "action": "Conditional re-confirmation if Intel supplies firm offtake and a date",
+      "feasibility": "high"
+    }
+  ],
+  "ruled_out": [
+    {
+      "action": "Top up the subsidy to make Magdeburg viable",
+      "reason": "No fiscal room after the budget hole, and it answers a demand problem with money"
+    },
+    {
+      "action": "Take an equity stake in the fab",
+      "reason": "No mandate; Intel did not ask for one"
+    },
+    {
+      "action": "Compel Intel to build on the original timetable",
+      "reason": "A grant is not a supply contract; no performance instrument exists"
+    }
+  ],
+  "reaction_function": [
+    {
+      "if": "Intel firms a date backed by named customer offtake",
+      "then": "BMF and BMWK jointly re-confirm the aid, with BMF re-papering the guarantee so it is unwindable",
+      "because": "BMF will not repeat the original open-ended commitment"
+    },
+    {
+      "if": "Intel repeats a delay without new commitments",
+      "then": "BMF treats it as cancellation and moves to de-commit; BMWK pivots to supplier support",
+      "because": "The gap wins over the programme"
+    },
+    {
+      "if": "Saxony-Anhalt offers co-funding",
+      "then": "The federal share is reduced and the project is kept alive at lower federal cost",
+      "because": "Shared cost lowers BMF's objection"
+    },
+    {
+      "if": "Intel cancels outright",
+      "then": "BMF books the EUR 9.9bn as available headroom; BMWK absorbs the credibility loss without a replacement anchor",
+      "because": "No substitute anchor is available in the window"
+    }
+  ],
+  "beliefs_about": [
+    {
+      "about": "Intel",
+      "order": 0,
+      "belief": "Intel's binding constraint is customer commitments and capex discipline, not German subsidy size",
+      "confidence": "high"
+    },
+    {
+      "about": "Intel",
+      "order": 1,
+      "belief": "Intel will let the Magdeburg option lapse and attribute it to demand rather than to the money",
+      "confidence": "moderate"
+    },
+    {
+      "about": "Intel's model of Berlin",
+      "order": 2,
+      "belief": "Intel assumes Berlin will park the money rather than admit the flagship failed - a belief FACT-004 contradicts",
+      "confidence": "moderate"
+    }
+  ],
+  "falsifiers": [
+    "BMF voluntarily re-earmarks or increases the EUR 9.9bn for Magdeburg after the cancellation",
+    "Evidence that the aid was already disbursed and legally irreversible before the 2024 pause",
+    "BMWK accepts the claw-back without contest, showing the internal split is weaker than modelled"
+  ],
+  "premises": [
+    "FACT-001",
+    "FACT-002",
+    "FACT-003",
+    "FACT-004",
+    "FACT-005"
+  ],
+  "premises_missing": [
+    "Whether any of the EUR 9.9bn was disbursed before the 2024 pause or only committed",
+    "Repayment and claw-back terms of the Commission's aid decision",
+    "Size and conditionality of Saxony-Anhalt's co-funding offer",
+    "The post-February-2025 federal government's position on the earmark"
+  ],
+  "version": 1,
+  "change_log": [],
+  "stale": false,
+  "simulation_ref": "simulations/SIM-ACT-002-r1.md"
+}

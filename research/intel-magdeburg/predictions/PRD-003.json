@@ -1,0 +1,23 @@
+{
+  "id": "PRD-003",
+  "hypothesis": "HYP-002",
+  "observable": "The status of the EUR 9.9bn earmark in German federal budget documents after September 2024.",
+  "indicator": "Budget line and off-budget vehicle reporting; supplementary budget documents",
+  "window": {
+    "from": "2024-09-18",
+    "to": "2026-06-30"
+  },
+  "confirm_if": "The earmark is de-committed, reallocated, or allowed to lapse without being re-offered to a successor investor",
+  "disconfirm_if": "The EUR 9.9bn is re-offered intact to an alternative investor for the same site",
+  "counter_indicator": "A new German chip subsidy package of comparable size for a different site",
+  "separates": [
+    [
+      "HYP-002",
+      "HYP-001"
+    ]
+  ],
+  "strength": "moderate",
+  "registered_at": "2026-11-13T02:12:00Z",
+  "late": false,
+  "judgement": "pending"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "SRC-006",
+  "url": "https://nrb.bg/en/intel-leaves-german-megafab-site-vacant",
+  "title": "Intel leaves German megafab site vacant",
+  "publisher": "NRB",
+  "published_at": "2026-09-07",
+  "retrieved_at": "2026-11-13",
+  "language": "en",
+  "tier": "media",
+  "derived_from": [
+    "SRC-001",
+    "SRC-003"
+  ],
+  "independence_class": "derived",
+  "access": "open",
+  "notes": "Fact-check style aggregation that itself recycles the Sept 2024 coverage and the July 2025 cancellation. Names Lindner and Habeck roles. Zero independence; useful only for the timeline it restates."
+}

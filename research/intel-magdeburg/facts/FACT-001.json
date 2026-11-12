@@ -1,0 +1,13 @@
+{
+  "id": "FACT-001",
+  "statement": "On 16 September 2024 Intel's CEO told employees the company would pause its Poland and Germany projects by approximately two years, citing anticipated market demand, while keeping US sites and Irish capacity.",
+  "kind": "statement-of-record",
+  "as_of": "2024-09-16",
+  "sources": [
+    "SRC-001"
+  ],
+  "verification_level": "confirmed",
+  "effective_independent": 1,
+  "contradicts": [],
+  "note": "Primary. This is what Intel said and when; it is not proof of the operative reason."
+}

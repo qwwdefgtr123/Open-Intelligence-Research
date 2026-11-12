@@ -1,0 +1,24 @@
+{
+  "id": "INV-001",
+  "question": "On what date did the sponsoring body's submission reach the ministry, per the receipt register?",
+  "separates": [["HYP-001", "HYP-002"]],
+  "expected_if": {
+    "first": "Submission arrives promptly and then sits unsigned, consistent with a fiscal veto.",
+    "second": "Submission arrives late because internal clearance was queued, consistent with capacity constraint."
+  },
+  "method": {
+    "kind": "record-lookup",
+    "queries_planned": 3,
+    "query_log": ["register search: programme name", "register search: sponsoring body, 2026", "cross-check gazette publication dates"]
+  },
+  "obtainability": "likely",
+  "cost": 2,
+  "rank_score": 0.5,
+  "null_result": false,
+  "result_summary": "Receipt entry dated 12 days after internal approval; no subsequent ministry action recorded within the window.",
+  "evidence": ["EVD-001"],
+  "status": "done",
+  "started_at": "2026-10-03T09:00:00Z",
+  "closed_at": "2026-10-03T13:30:00Z",
+  "round": 1
+}

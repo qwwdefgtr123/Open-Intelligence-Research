@@ -1,0 +1,15 @@
+{
+  "id": "FACT-003",
+  "statement": "In July 2025 Intel cancelled the German and Polish projects outright; incoming CEO Lip-Bu Tan cited insufficient customer commitments and the risk of spending tens of billions on capacity that might not pay off, alongside Q2 2025 revenue of USD 12.9bn and a net loss of USD 2.9bn.",
+  "kind": "event",
+  "as_of": "2025-07-25",
+  "sources": [
+    "SRC-002",
+    "SRC-003",
+    "SRC-005"
+  ],
+  "verification_level": "corroborated",
+  "effective_independent": 2,
+  "contradicts": [],
+  "note": "Three sources, two roots: SRC-005 is a reprint of SRC-003's material. Effective independent = 2."
+}

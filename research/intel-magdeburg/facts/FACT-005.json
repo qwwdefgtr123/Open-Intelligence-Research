@@ -1,0 +1,13 @@
+{
+  "id": "FACT-005",
+  "statement": "In 2024 Intel announced roughly 15,000 job cuts in August and a USD 10bn savings target, reported a quarterly loss near USD 10bn in Q3 2024, and its shares fell by more than half over the year; the company said it would keep investing in Arizona, Oregon, New Mexico and Ohio.",
+  "kind": "figure",
+  "as_of": "2024-09-18",
+  "sources": [
+    "SRC-004"
+  ],
+  "verification_level": "single-source",
+  "effective_independent": 1,
+  "contradicts": [],
+  "note": "Aggregated reporting only; figures should be re-verified against Intel's filings before any load-bearing use."
+}

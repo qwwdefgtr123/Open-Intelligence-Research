@@ -1,0 +1,23 @@
+{
+  "id": "PRD-004",
+  "hypothesis": "HYP-003",
+  "observable": "The process node of any new European logic fab announced by 2026-12, and whether any European customer contracts leading-edge volume.",
+  "indicator": "Announced node generation and named anchor customers",
+  "window": {
+    "from": "2025-07-25",
+    "to": "2026-12-31"
+  },
+  "confirm_if": "New European capacity is at mature nodes, and no European anchor contracts sub-7nm volume",
+  "disconfirm_if": "A leading-edge fab with a named European anchor customer is announced for Europe",
+  "counter_indicator": "A European consortium contracting leading-edge wafer volume without a fab",
+  "separates": [
+    [
+      "HYP-003",
+      "HYP-005"
+    ]
+  ],
+  "strength": "moderate",
+  "registered_at": "2026-11-13T02:13:00Z",
+  "late": false,
+  "judgement": "pending"
+}

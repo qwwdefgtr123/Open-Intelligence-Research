@@ -1,0 +1,14 @@
+{
+  "id": "FACT-004",
+  "statement": "The September 2024 postponement triggered a dispute inside the German governing coalition, with the finance minister seeking to return the roughly EUR 9.9bn set aside for the project to the general budget and the economy minister resisting.",
+  "kind": "event",
+  "as_of": "2024-09-18",
+  "sources": [
+    "SRC-004",
+    "SRC-006"
+  ],
+  "verification_level": "single-source",
+  "effective_independent": 1,
+  "contradicts": [],
+  "note": "Both sources recycle the same German reporting; the FAZ/Spiegel originals were not retrieved. Treated as single-source and load-bearing only as context."
+}

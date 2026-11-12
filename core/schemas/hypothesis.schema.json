@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/hypothesis.schema.json",
+  "title": "OIR hypothesis",
+  "description": "A candidate explanation with a mechanism. A hypothesis with an empty predictions array cannot hold a status above `draft`, and draft hypotheses are excluded from synthesis.",
+  "type": "object",
+  "required": ["id", "statement", "mechanism", "scope", "premises", "predictions", "relation_to_others", "status"],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "pattern": "^HYP-[0-9]{3,}$" },
+    "statement": {
+      "type": "string",
+      "minLength": 16,
+      "description": "One sentence, declarative. Multi-clause hypotheses cannot be disconfirmed."
+    },
+    "mechanism": {
+      "type": "string",
+      "minLength": 60,
+      "description": "The causal chain, step by step, with identifiable links. A conclusion without a mechanism generates no novel predictions."
+    },
+    "scope": {
+      "type": "object",
+      "required": ["where", "when"],
+      "additionalProperties": true,
+      "properties": {
+        "where": { "type": "string" },
+        "when": { "type": "string" },
+        "excludes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "premises": {
+      "type": "array",
+      "description": "FACT or CLM ids the hypothesis rests on. Enables the model-revision check in workflow 06.",
+      "items": { "type": "string", "pattern": "^(FACT|CLM)-[0-9]{3,}$" }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ASM-[0-9]{3,}$" }
+    },
+    "predictions": {
+      "type": "array",
+      "description": "Pre-registered, before any investigation that could test them.",
+      "items": { "type": "string", "pattern": "^PRD-[0-9]{3,}$" }
+    },
+    "supporting": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^EVD-[0-9]{3,}$" }
+    },
+    "undermining": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^EVD-[0-9]{3,}$" }
+    },
+    "relation_to_others": {
+      "type": "array",
+      "description": "Mutual exclusivity is not required and must not be manufactured. Record the actual relation.",
+      "items": {
+        "type": "object",
+        "required": ["hypothesis", "relation"],
+        "additionalProperties": true,
+        "properties": {
+          "hypothesis": { "type": "string", "pattern": "^HYP-[0-9]{3,}$" },
+          "relation": { "type": "string", "enum": ["contradicts", "overlaps", "subsumes", "conditional", "independent"] },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "live", "strengthened", "weakened", "excluded"],
+      "description": "draft = incomplete (no prediction or no mechanism) and excluded from synthesis."
+    },
+    "status_reason": { "type": "string" },
+    "survived": {
+      "type": "array",
+      "description": "Attack surfaces this hypothesis withstood in review. Survival is a result; a surface never attacked is untested, not clean.",
+      "items": { "type": "string" }
+    },
+    "origin": {
+      "type": "string",
+      "enum": ["actor-model", "adjudicated-interaction", "documented-interpretation", "question-presupposition"],
+      "description": "Where the hypothesis came from. Documented interpretations are the lowest-value source and should not dominate the register."
+    },
+    "created_at": { "type": "string" },
+    "supersedes": { "type": "string", "pattern": "^HYP-[0-9]{3,}$" }
+  }
+}

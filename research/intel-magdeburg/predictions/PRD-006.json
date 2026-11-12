@@ -1,0 +1,23 @@
+{
+  "id": "PRD-006",
+  "hypothesis": "HYP-005",
+  "observable": "Entries in the European Commission's state aid register concerning aid to Intel for Magdeburg after September 2024.",
+  "indicator": "New or amended aid decisions for the site or a successor investor",
+  "window": {
+    "from": "2024-09-18",
+    "to": "2026-12-31"
+  },
+  "confirm_if": "No new notification or amended decision appears for the site",
+  "disconfirm_if": "A fresh notification for the same site and an amended approval appear",
+  "counter_indicator": "An aid decision explicitly preserving the original approval through the pause",
+  "separates": [
+    [
+      "HYP-005",
+      "HYP-001"
+    ]
+  ],
+  "strength": "weak",
+  "registered_at": "2026-11-13T02:15:00Z",
+  "late": false,
+  "judgement": "pending"
+}

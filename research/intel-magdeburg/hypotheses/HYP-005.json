@@ -1,0 +1,34 @@
+{
+  "id": "HYP-005",
+  "statement": "Because the aid was project- and site-specific, the 2024 pause was functionally a cancellation: restarting required a fresh notification and a fresh Intel commitment, so the option was worth less than it appeared.",
+  "mechanism": "State aid approved for a named project at a named site does not travel. Any re-scoped use needs a new Commission notification and a new member-state decision, each taking months and each a fresh political fight. A two-year pause therefore does not preserve the option; it destroys the approval that made the option valuable, while leaving Intel holding land costs and political expectations. Rational actors who understand this do not pause - they cancel, which is what happened a year later. Weakest link: whether the approval in fact lapsed or could be revived by administrative act; the aid decision text was not retrieved.",
+  "scope": {
+    "where": "EU state aid procedure for the Magdeburg project",
+    "when": "2024-09 to 2025-07"
+  },
+  "premises": [
+    "FACT-002",
+    "FACT-003"
+  ],
+  "assumptions": [],
+  "predictions": [
+    "PRD-006"
+  ],
+  "supporting": [],
+  "undermining": [],
+  "relation_to_others": [
+    {
+      "hypothesis": "HYP-001",
+      "relation": "overlaps",
+      "note": "Explains why deferral was not a real option, reinforcing the cash story"
+    },
+    {
+      "hypothesis": "HYP-002",
+      "relation": "overlaps",
+      "note": "Both locate the decisive constraint in institutions rather than demand"
+    }
+  ],
+  "status": "live",
+  "origin": "adjudicated-interaction",
+  "created_at": "2026-11-13T02:09:00Z"
+}

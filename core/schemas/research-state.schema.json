@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/research-state.schema.json",
+  "title": "OIR research state index",
+  "description": "Contract for research/<slug>/index.json. Holds run identity, freeze records, counters and ID registries. Never holds full entity content.",
+  "type": "object",
+  "required": ["schema_version", "research", "counters"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "research": {
+      "type": "object",
+      "required": ["id", "question", "as_of", "decision_context", "scale"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "pattern": "^RES-[0-9]{3,}$" },
+        "question": { "type": "string", "minLength": 12 },
+        "as_of": {
+          "type": "string",
+          "format": "date",
+          "description": "Information cutoff. Nothing published after this date may enter the run."
+        },
+        "decision_context": {
+          "type": "string",
+          "minLength": 12,
+          "description": "Who uses the answer, for what. A run without one has no stopping criterion."
+        },
+        "scope_in": { "type": "array", "items": { "type": "string" } },
+        "scope_out": { "type": "array", "items": { "type": "string" } },
+        "scale": { "type": "string", "enum": ["lean", "standard", "extended"] },
+        "seats": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "actors": { "type": "integer", "minimum": 1, "maximum": 6 },
+            "evidence": { "type": "integer", "enum": [0, 1] },
+            "red_team": { "type": "integer", "enum": [0, 1] },
+            "synthesis": { "type": "integer", "enum": [0, 1] }
+          }
+        }
+      }
+    },
+    "fact_snapshot": {
+      "type": "object",
+      "required": ["version", "ids", "hash"],
+      "additionalProperties": true,
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "ids": { "type": "array", "items": { "type": "string", "pattern": "^FACT-[0-9]{3,}$" } },
+        "hash": { "type": "string", "minLength": 16 },
+        "frozen_at": { "type": "string" }
+      }
+    },
+    "prediction_set": {
+      "type": "object",
+      "required": ["ids", "registered_at"],
+      "additionalProperties": true,
+      "properties": {
+        "ids": { "type": "array", "items": { "type": "string", "pattern": "^PRD-[0-9]{3,}$" } },
+        "registered_at": {
+          "type": "string",
+          "description": "Frozen before any INV is created. Predictions added later are marked late."
+        }
+      }
+    },
+    "actor_set": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "ids": { "type": "array", "items": { "type": "string", "pattern": "^ACT-[0-9]{3,}$" } },
+        "runs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["actor", "execution_unit", "simulation_input_hash"],
+            "additionalProperties": true,
+            "properties": {
+              "actor": { "type": "string", "pattern": "^ACT-[0-9]{3,}$" },
+              "execution_unit": {
+                "type": "string",
+                "description": "Opaque platform identifier. Must be distinct per actor; two actors sharing one unit is an isolation failure."
+              },
+              "simulation_input_hash": {
+                "type": "string",
+                "description": "Hash of (fact snapshot + actor brief). Duplicate hashes across actors fail the isolation check."
+              }
+            }
+          }
+        }
+      }
+    },
+    "counters": {
+      "type": "object",
+      "required": ["runs", "queries", "rounds"],
+      "additionalProperties": true,
+      "properties": {
+        "runs": { "type": "integer", "minimum": 0 },
+        "queries": { "type": "integer", "minimum": 0 },
+        "rounds": { "type": "integer", "minimum": 0 },
+        "runs_max": { "type": "integer", "minimum": 1 },
+        "queries_max": { "type": "integer", "minimum": 1 },
+        "rounds_max": { "type": "integer", "minimum": 1 },
+        "degradation_level": { "type": "string", "enum": ["L0", "L1", "L2", "L3", "L4"] },
+        "wall_started_at": { "type": "string" }
+      }
+    },
+    "registries": {
+      "type": "object",
+      "description": "ID to one-line summary. Navigation aid only; never authoritative content. A plain string is the normal form.",
+      "additionalProperties": { "type": ["string", "object"] }
+    },
+    "deid_map": {
+      "type": "object",
+      "description": "Substitution map used for blind red-team input. Stored so adjudication can re-identify, never included in the red-team input itself.",
+      "additionalProperties": { "type": "string" }
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

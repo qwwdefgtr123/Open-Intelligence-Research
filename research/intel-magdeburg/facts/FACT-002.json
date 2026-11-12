@@ -1,0 +1,14 @@
+{
+  "id": "FACT-002",
+  "statement": "The Magdeburg project was announced in 2022 at about EUR 30bn with roughly 3,000 jobs and production originally planned for 2027-2028; the German federal government pledged about EUR 9.9bn in subsidies and the Commission approved the aid.",
+  "kind": "figure",
+  "as_of": "2024-09-16",
+  "sources": [
+    "SRC-002",
+    "SRC-004"
+  ],
+  "verification_level": "corroborated",
+  "effective_independent": 2,
+  "contradicts": [],
+  "note": "Two roots: EE Times and the aggregated German reporting."
+}

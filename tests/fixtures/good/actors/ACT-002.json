@@ -1,0 +1,54 @@
+{
+  "id": "ACT-002",
+  "identity": {
+    "name": "Sponsoring infrastructure body",
+    "type": "government_body",
+    "level": "composite"
+  },
+  "goals": [
+    { "goal": "Deliver the programme on the announced schedule", "priority": 1, "horizon": "multi-year" },
+    { "goal": "Preserve its reputation for delivery", "priority": 2 }
+  ],
+  "fears": ["Losing the programme entirely after years of preparation"],
+  "factions": [
+    { "name": "Programme office", "weight": 0.7, "goal": "Deliver on schedule", "can_veto": false },
+    { "name": "Legal affairs", "weight": 0.3, "goal": "Avoid an approval that could be challenged", "can_veto": true, "veto_scope": "any submission that bypasses co-signature" }
+  ],
+  "decision_rule": "Legal affairs prevails on procedural questions; the programme office prevails on scheduling and scope.",
+  "resources": [
+    { "resource": "Project pipeline and delivery staff", "kind": "relational", "magnitude": "substantial" },
+    { "resource": "Public communication channel", "kind": "informational", "magnitude": "moderate" }
+  ],
+  "constraints": [
+    { "constraint": "Cannot implement without co-signature", "kind": "legal", "source": "FACT-001", "hardness": "hard" },
+    { "constraint": "Cost estimate is fixed for the current fiscal year", "kind": "fiscal", "source": "FACT-002", "hardness": "soft" }
+  ],
+  "risk_tolerance": "moderate",
+  "options": [
+    { "action": "Submit a revised estimate with scope reduced to fit the ceiling", "feasibility": "high", "requires": ["FACT-002"] },
+    { "action": "Escalate publicly against the ministry", "feasibility": "medium" },
+    { "action": "Wait for the next fiscal year", "feasibility": "high" }
+  ],
+  "ruled_out": [
+    { "action": "Proceed without co-signature", "reason": "Legal affairs would veto; the approval would be challengeable" }
+  ],
+  "reaction_function": [
+    { "if": "The ministry signals that a reduced scope would be signed", "then": "A revised estimate is submitted within one quarter", "because": "Delivery matters more than scope" },
+    { "if": "The ministry gives no signal and the schedule slips publicly", "then": "Public escalation, framed as procedural obstruction", "because": "Reputation cost of silence exceeds the relationship cost" }
+  ],
+  "beliefs_about": [
+    { "about": "the ceiling", "order": 0, "belief": "Binding in the current fiscal year" },
+    { "about": "PARTY-A", "order": 1, "belief": "Will sign a reduced-scope submission", "confidence": "moderate" },
+    { "about": "PARTY-A", "order": 2, "belief": "Expects this body to absorb the scope reduction quietly", "confidence": "low" }
+  ],
+  "falsifiers": [
+    "A revised estimate submitted without any prior signal from the ministry",
+    "A decision to abandon the programme rather than reduce scope"
+  ],
+  "premises": ["FACT-001", "FACT-002"],
+  "premises_missing": ["Whether a reduced scope is technically feasible within the same site"],
+  "version": 1,
+  "change_log": [],
+  "stale": false,
+  "simulation_ref": "simulations/SIM-ACT-002-r1.md"
+}

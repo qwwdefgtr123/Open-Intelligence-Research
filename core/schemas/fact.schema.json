@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://open-intelligence-research/schemas/fact.schema.json",
+  "title": "OIR fact",
+  "description": "A verified statement about the world, with sources. A fact is what happened or what was said; it is never what someone wanted. verification_level encodes cross-source independence, not source prestige.",
+  "type": "object",
+  "required": ["id", "statement", "as_of", "sources", "verification_level", "kind"],
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "pattern": "^FACT-[0-9]{3,}$" },
+    "statement": { "type": "string", "minLength": 12 },
+    "kind": {
+      "type": "string",
+      "enum": ["event", "document", "figure", "statement-of-record", "legal", "physical"],
+      "description": "statement-of-record means 'X said Y on date Z'. The fact is the utterance, not its content's truth."
+    },
+    "as_of": { "type": "string", "format": "date" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^SRC-[0-9]{3,}$" }
+    },
+    "verification_level": {
+      "type": "string",
+      "enum": ["confirmed", "corroborated", "single-source"],
+      "description": "corroborated requires >=2 ROOT sources, not >=2 urls."
+    },
+    "effective_independent": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Distinct root sources behind this fact."
+    },
+    "contradicts": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^FACT-[0-9]{3,}$" }
+    },
+    "supersedes": { "type": "string", "pattern": "^FACT-[0-9]{3,}$" },
+    "note": { "type": "string" },
+    "recorded_at": { "type": "string" }
+  }
+}
