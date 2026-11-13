@@ -10,17 +10,24 @@ Checks, in order:
   6. Actor seats ran in distinct execution units with distinct input hashes.
   7. A hypothesis with no predictions is not above `draft`.
   8. No composite confidence figure anywhere in a hypothesis.
+  9. `fact_snapshot.hash` matches a recomputed sha256 over the frozen facts - a
+     frozen snapshot that cannot be verified is decoration, not a freeze.
+
+Exit codes:
+  0  all checks passed, including schema validation
+  1  failures found
+  3  INCOMPLETE - jsonschema is not installed, so the schema layer did not run.
+     This is deliberately not 0: a check that did not run must not report a pass.
 
 Usage:
     python tests/scripts/validate_state.py research/<slug>
     python tests/scripts/validate_state.py research/<slug> --check-isolation
-
-Exit code 0 = pass, 1 = failures found. Warnings never fail the run.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -49,6 +56,7 @@ class Report:
         self.errors: list[str] = []
         self.warnings: list[str] = []
         self.checks = 0
+        self.schema_checked = False
 
     def error(self, msg: str) -> None:
         self.errors.append(msg)
@@ -70,7 +78,13 @@ class Report:
             print(f"FAILURES: {len(self.errors)}")
             for e in self.errors:
                 print(f"  ! {e}")
+            print("result: FAIL")
             return 1
+        if not self.schema_checked:
+            print("result: INCOMPLETE - the schema layer did not run")
+            print("        install jsonschema (pip install -r requirements.txt) and re-run.")
+            print("        Do not report this run as validated.")
+            return 3
         print("result: PASS")
         return 0
 
@@ -111,8 +125,9 @@ def collect(root: Path, rep: Report) -> dict[str, dict]:
 
 def validate_schemas(root: Path, store: dict[str, dict], schemas_dir: Path, rep: Report) -> None:
     if jsonschema is None:
-        rep.warn("jsonschema not installed - schema validation skipped (structural checks still run)")
+        rep.warn("jsonschema not installed - schema layer skipped, result will be INCOMPLETE")
         return
+    rep.schema_checked = True
     for folder, (_prefix, schema_name) in ENTITY_DIRS.items():
         d = root / folder
         if not d.is_dir():
@@ -295,6 +310,31 @@ def check_missing_mechanism_len(store: dict[str, dict], rep: Report) -> None:
             rep.warn(f"{hid}: mechanism shorter than 60 chars - likely a gesture, not a chain")
 
 
+def check_snapshot_hash(index: dict, store: dict[str, dict], rep: Report) -> None:
+    """The freeze is only a freeze if the hash can be recomputed from the facts."""
+    snap = index.get("fact_snapshot") or {}
+    recorded = snap.get("hash")
+    ids = snap.get("ids") or []
+    if not recorded or not ids:
+        return
+    missing = [i for i in ids if i not in store]
+    for i in missing:
+        rep.error(f"fact_snapshot lists {i}, which does not exist")
+    if missing:
+        return
+    payload = "\n".join(f"{i}\t{store[i].get('statement', '')}" for i in sorted(ids))
+    actual = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    if recorded != actual:
+        rep.error(
+            "fact_snapshot.hash does not match the frozen facts "
+            f"(recorded {recorded[:16]}..., recomputed {actual[:16]}...). "
+            "If a fact was intentionally revised, bump fact_snapshot.version and record "
+            "a DEC of kind fact-revision; otherwise a fact was edited after the freeze."
+        )
+    else:
+        rep.ok()
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("research_dir")
@@ -335,6 +375,7 @@ def main() -> int:
 
     store = collect(root, rep)
     validate_schemas(root, store, schemas_dir, rep)
+    check_snapshot_hash(index, store, rep)
     check_references(store, rep)
     check_prediction_timing(store, rep)
     check_independence(store, rep)

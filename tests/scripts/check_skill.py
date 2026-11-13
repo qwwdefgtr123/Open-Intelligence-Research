@@ -106,12 +106,23 @@ def check_skill(skill_dir: Path, repo_root: Path) -> tuple[list[str], list[str]]
     if "core/" not in text:
         warnings.append(f"{skill_dir.name}: does not reference core/ - the skill may have forked methodology")
 
-    for ref in re.findall(r"`([A-Za-z0-9_./-]+\.(?:md|json|py))`", body):
-        if ref.startswith(("http", "/")):
+    if "{{" in body:
+        errors.append(f"{skill_dir.name}: unresolved template placeholder in body (found '{{{{')")
+
+    for ref in re.findall(r"`([^`]+\.(?:md|json|py))`", body):
+        if ref.startswith(("http://", "https://")):
             continue
-        candidates = [skill_dir / ref, repo_root / ref]
+        if any(c.isspace() for c in ref):
+            errors.append(
+                f"{skill_dir.name}: path contains whitespace, template prose leaked into a path: {ref[:70]!r}"
+            )
+            continue
+        rel = ref.replace("$OIR_ROOT/", "").lstrip("./")
+        if rel.startswith("/") or rel.startswith("<"):
+            continue
+        candidates = [repo_root / rel, skill_dir / rel]
         if not any(c.exists() for c in candidates):
-            warnings.append(f"{skill_dir.name}: referenced file not found: {ref}")
+            errors.append(f"{skill_dir.name}: referenced file not found: {ref}")
 
     return errors, warnings
 

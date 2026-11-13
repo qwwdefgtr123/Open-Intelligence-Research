@@ -151,6 +151,7 @@ Open-Intelligence-Research/
 | File | What it is |
 |---|---|
 | [README.md](README.md) | This file: the single entry for humans and agents (there is no separate `AGENTS.md`, by design) |
+| [requirements.txt](requirements.txt) | The only dependency: `jsonschema`, for the state validator |
 | [CHANGELOG.md](CHANGELOG.md) | Version history and the decisions behind them |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | What changes are welcome, and the consistency rule |
 | [LICENSE](LICENSE) | MIT |
@@ -215,6 +216,7 @@ Open-Intelligence-Research/
 | [tests/compatibility-checklist.md](tests/compatibility-checklist.md) | Per-platform install and behaviour checklist |
 | [tests/experiments/README.md](tests/experiments/README.md) | The four-mode comparison protocol, with its controls and limits |
 | [tests/records/2026-11-13-mode-a-vs-b.md](tests/records/2026-11-13-mode-a-vs-b.md) | The one executed comparison, and its uncomfortable result |
+| [tests/records/2026-11-13-external-review.md](tests/records/2026-11-13-external-review.md) | A simulated third-party review of the published repository: nine defects, including four that made a shipped artifact unusable |
 | [tests/scripts/validate_state.py](tests/scripts/validate_state.py) | Schema + cross-reference + prediction timing + independence + isolation |
 | [tests/scripts/check_skill.py](tests/scripts/check_skill.py) | Frontmatter, naming, secret scan, path scan |
 | [tests/scripts/check_structure.py](tests/scripts/check_structure.py) | Empty files, broken links, required files, platform-word scan of `core/` |
@@ -302,11 +304,20 @@ Expected behaviour: it confirms the question is not a lookup, names a cutoff, pr
 ### Verify a run
 
 ```bash
+pip install -r requirements.txt          # only dependency: jsonschema
 python tests/scripts/validate_state.py research/<slug> --check-isolation
 ```
 
-Report the result honestly. If `jsonschema` is absent the validator degrades to
-structural checks and says so; it does not claim a pass.
+Exit codes are meaningful:
+
+| Code | Meaning |
+|---|---|
+| `0` | All checks passed, **including** schema validation |
+| `1` | Failures found |
+| `3` | **INCOMPLETE** — `jsonschema` is missing, so the schema layer never ran. The structural checks still ran and may have passed, but this is not a validated state |
+
+Exit 3 exists because a check that did not run must not report a pass. Report the
+code honestly; do not describe an INCOMPLETE run as validated.
 
 ### Scale
 
@@ -343,15 +354,22 @@ run `python packaging/build.py --only <id>`, add a row to
 verification sentence. If the platform cannot isolate seats, say so in its `dispatch`
 text.
 
-**Run the checks** — all three must pass:
+**Run the checks** — all of these must pass, in this order:
 
 ```bash
+pip install -r requirements.txt
 python packaging/build.py --check
 python tests/scripts/check_skill.py distributions/
 python tests/scripts/check_structure.py
 python tests/scripts/validate_state.py tests/fixtures/good
 python tests/scripts/validate_state.py tests/fixtures/broken   # must exit 1
 ```
+
+`build.py --check` catches edits made to a generated `SKILL.md` instead of the
+template. It also refuses a `core_root` value that is prose rather than a path
+token — a sentence there once corrupted every file path in all three packages,
+including a shell command, and the skill checker did not notice because it skipped
+any reference it could not resolve. Both holes are now covered by a test.
 
 **Run the comparison** — [tests/experiments/README.md](tests/experiments/README.md).
 Modes C and D are the highest-value unfinished work in this repository.

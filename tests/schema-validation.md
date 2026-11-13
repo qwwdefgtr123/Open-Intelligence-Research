@@ -54,30 +54,44 @@ JSON Schema validates one document at a time. These need the script:
 ## 4. How to run
 
 ```bash
-python tests/scripts/validate_state.py tests/fixtures/good
-python tests/scripts/validate_state.py tests/fixtures/broken          # must exit 1
+pip install -r requirements.txt
+python tests/scripts/validate_state.py tests/fixtures/good      # expect exit 0
+python tests/scripts/validate_state.py tests/fixtures/broken    # expect exit 1
 python tests/scripts/validate_state.py research/<slug> --check-isolation
 ```
 
-Requires `jsonschema`. Without it the script degrades to structural and
-cross-reference checks only, and says so — it does not silently claim a pass:
+Exit codes:
 
-```
-~ jsonschema not installed - schema validation skipped (structural checks still run)
-```
+| Code | Meaning |
+|---|---|
+| `0` | All checks passed, including schema validation |
+| `1` | Failures found |
+| `3` | **INCOMPLETE** — `jsonschema` is absent, so the schema layer did not run |
+
+Exit 3 was added after a review found the script printing `result: PASS` while
+silently skipping thirteen schema checks on a machine without the dependency. A
+verb that did not run is not a pass, and a maintainer reading only the exit code
+cannot tell the difference.
 
 ## 5. Fixtures
 
 `tests/fixtures/good` — a minimal but complete two-actor, two-hypothesis run. Small
 enough to read in one screen, complete enough to exercise every cross-reference rule.
 
-`tests/fixtures/broken` — the same run with one defect planted per rule:
+`tests/fixtures/broken` — the same run with one defect planted per rule. It is
+**committed** so the negative test runs from a fresh clone with no generation step,
+and **generated** by `tests/fixtures/make_broken.py` so the defects stay in sync with
+the rules:
+
+```bash
+python tests/fixtures/make_broken.py   # should produce no diff if nothing drifted
+```
 
 | Fixture defect | Rule it must trigger |
 |---|---|
 | `FACT-001` references a missing `SRC-099` | dangling reference |
 | `HYP-002` has `predictions: []` but `status: live` | no prediction, no hypothesis |
-| `PRD-001.judged_at` before `registered_at`, `late` unset | prediction timing |
+| `PRD-002` registered after its investigation started, `late` unset | prediction timing |
 | `EVD-001` claims 3 independent from 1 root | independence overcount |
 | `SRC-003.derived_from` contains a cycle | dependency cycle |
 | `HYP-003` carries `confidence: 0.7` | forbidden composite figure |
@@ -86,6 +100,12 @@ enough to read in one screen, complete enough to exercise every cross-reference 
 The point of T8 is that the validator's output names each of these. A validator
 passing the `good` fixture proves nothing; a validator passing the `broken` one is
 broken.
+
+Two rules have no fixture defect yet, because they are hard to plant without a second
+run: the `fact_snapshot` hash check and the "`ACT` referenced a fact that does not
+exist" case (covered by the dangling-reference rule in practice). The hash check was
+nonetheless exercised — it fired on a genuine post-freeze edit during review, which is
+the only kind of test that matters for a freeze.
 
 ## 6. Versioning
 

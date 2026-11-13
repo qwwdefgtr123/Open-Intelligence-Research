@@ -3,10 +3,11 @@
   "note": "Single source of truth for platform distributions. `python packaging/build.py` stamps packaging/skill.template.md into distributions/<id>/skills/<skill>/. Never hand-edit a generated SKILL.md; edit the template or this file, then rebuild.",
   "skill": {
     "name": "oir",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "upstream": "Open-Intelligence-Research",
     "description": "Run a closed-loop research method for questions where several parties hold conflicting interests and public material supports more than one explanation. Builds a verified fact base, models each party in an isolated seat, generates competing hypotheses with pre-registered predictions, investigates only evidence that separates them, runs a blind adversarial review, and updates its own state until a stop rule fires. Use when the user asks why an actor behaved as it did, what a government or firm will do next, which reading of a contested situation holds up, or asks for a multi-perspective, red-team or competing-hypotheses analysis. Not for factual lookups, single-party questions, or plain summarisation.",
-    "core_root": "the repository root containing core/ - resolve it from the skill's own location, or from the installed copy if the repository was cloned alongside"
+    "core_root": "$OIR_ROOT",
+    "core_root_note": "A short path token, never prose. It is substituted into file paths and into a shell command, so a sentence here corrupts every reference in the generated skill. build.py rejects values that contain whitespace or exceed 24 characters; the human-readable explanation of how to resolve the root lives in skill.template.md, where it belongs, because it is platform-neutral."
   },
   "platforms": [
     {

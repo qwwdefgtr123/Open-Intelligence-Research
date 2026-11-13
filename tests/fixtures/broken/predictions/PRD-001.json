@@ -1,0 +1,18 @@
+{
+  "id": "PRD-001",
+  "hypothesis": "HYP-001",
+  "observable": "The date the sponsoring body's submission reached the ministry, as recorded in the ministry's receipt register.",
+  "indicator": "A dated receipt entry in an official register",
+  "window": { "from": "2026-04-01", "to": "2026-09-30" },
+  "confirm_if": "Submission received within 30 days of the internal approval, with no further ministry action for more than 60 days",
+  "disconfirm_if": "No submission received in the window, or co-signature granted within 14 days of receipt",
+  "counter_indicator": "No receipt entry exists because the submission was never sent",
+  "separates": [["HYP-001", "HYP-002"]],
+  "strength": "strong",
+  "registered_at": "2026-10-02T10:06:00Z",
+  "late": false,
+  "judgement": "confirmed",
+  "judged_at": "2026-10-03T14:00:00Z",
+  "judged_by": "EVD-001",
+  "judgement_note": "Receipt dated 12 days after internal approval; no ministry action recorded for 74 days."
+}

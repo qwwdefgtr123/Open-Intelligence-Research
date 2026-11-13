@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -36,6 +37,15 @@ PLACEHOLDERS = [
 
 
 def render(template: str, skill: dict, platform: dict) -> str:
+    core_root = skill["core_root"]
+    # A placeholder substituted into file paths and a shell command must be a path
+    # token, not prose. This guard exists because a sentence once shipped here and
+    # silently corrupted every path in all three generated skills.
+    if len(core_root) > 24 or any(c.isspace() for c in core_root):
+        raise SystemExit(
+            f"skill.core_root must be a short path token with no spaces, got {core_root!r}. "
+            "Put the explanation in packaging/skill.template.md instead."
+        )
     install_lines = "\n".join(
         f"| {i['scope']} | `{i['path']}` |" + (f" also `{i['windows']}`" if i.get("windows") else "")
         for i in platform["install"]
@@ -44,8 +54,7 @@ def render(template: str, skill: dict, platform: dict) -> str:
     dispatch_block = (
         f"**Platform: {platform['display']}**\n\n"
         f"Install locations:\n\n| Scope | Path |\n|---|---|\n{install_lines}\n\n"
-        f"{dispatch}\n\n"
-        f"Verification status ({platform['verified']}): {platform['verification']}"
+        f"{dispatch}"
     )
 
     out = template
@@ -63,6 +72,17 @@ def render(template: str, skill: dict, platform: dict) -> str:
     leftovers = [p for p in PLACEHOLDERS if p in out]
     if leftovers:
         raise SystemExit(f"unresolved placeholders: {leftovers}")
+
+    # Every core-root reference must be a plain path tail, including inside fenced
+    # code blocks, where an inline-backtick checker cannot see it. This is the check
+    # that would have caught a prose sentence being substituted into `python <path>`.
+    for m in re.finditer(r"\$OIR_ROOT([^\s`]*)", out):
+        tail = m.group(1)
+        if not re.fullmatch(r"(/[A-Za-z0-9_./<>-]+)?", tail):
+            raise SystemExit(
+                f"core-root reference is not a clean path: '$OIR_ROOT{tail}'. "
+                "Check skill.core_root in packaging/platforms.json and the template."
+            )
     return out
 
 

@@ -1,0 +1,16 @@
+{
+  "id": "SRC-001",
+  "url": "https://example.invalid/programme-rules",
+  "title": "Programme approval rules",
+  "publisher": "Fixture Gazette",
+  "published_at": "2026-03-01",
+  "retrieved_at": "2026-10-02",
+  "language": "en",
+  "tier": "primary",
+  "derived_from": [
+    "SRC-002"
+  ],
+  "independence_class": "root",
+  "access": "open",
+  "notes": "Fixture source. Not a real document."
+}

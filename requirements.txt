@@ -1,0 +1,10 @@
+# Runtime dependency for the state validator only.
+# The other scripts (check_skill.py, check_structure.py, packaging/build.py) use
+# the standard library and need no install.
+#
+#   pip install -r requirements.txt
+#
+# Without jsonschema, validate_state.py still runs its structural and
+# cross-reference checks but reports INCOMPLETE and exits 3 - a check that did not
+# run is not a pass.
+jsonschema>=4.18,<5

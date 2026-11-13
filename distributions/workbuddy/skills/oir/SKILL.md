@@ -4,7 +4,7 @@ description: Run a closed-loop research method for questions where several parti
 license: MIT
 compatibility: Requires filesystem read/write and a subagent dispatch mechanism. Primary target.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   upstream: "Open-Intelligence-Research"
 ---
 
@@ -23,13 +23,17 @@ orchestrate seats, adjudicate, and assemble.
 
 ## Read before you start
 
-Resolve `the repository root containing core/ - resolve it from the skill's own location, or from the installed copy if the repository was cloned alongside` — the repository root that contains `core/`. Then read, in
-this order, and nothing more:
+Set `OIR_ROOT` to the directory that contains `core/`. Resolve it from this skill's
+own location — the installed skill directory holds a copy of `core/` — or from the
+repository if it was cloned alongside. Do not guess a path and do not proceed
+without one: if you cannot resolve it, stop and say so.
+
+Then read, in this order, and nothing more:
 
 | File | Why |
 |---|---|
-| `the repository root containing core/ - resolve it from the skill's own location, or from the installed copy if the repository was cloned alongside/core/PRINCIPLES.md` | The seven principles and three operating rules. Every gate below derives from these |
-| `the repository root containing core/ - resolve it from the skill's own location, or from the installed copy if the repository was cloned alongside/core/CORE_SPEC.md` | Entity model, state layout, seat tiers, budget, stop rules. Authoritative |
+| `$OIR_ROOT/core/PRINCIPLES.md` | The seven principles and three operating rules. Every gate below derives from these |
+| `$OIR_ROOT/core/CORE_SPEC.md` | Entity model, state layout, seat tiers, budget, stop rules. Authoritative |
 | the one workflow for the stage you are on | See the map below |
 | the role file for the seat you are dispatching | Contains the prompt preamble you must inject verbatim |
 
@@ -39,12 +43,12 @@ Do **not** read the whole repository. Each stage names its file.
 
 | Stage | File | You are |
 |---|---|---|
-| S0–S1 intake and fact base | `core/workflows/01-research-intake.md` | Director |
-| S2 actor simulation + adjudication | `core/workflows/02-actor-simulation.md` | Director dispatching actors |
-| S3 hypotheses and predictions | `core/workflows/03-hypothesis-generation.md` | Director in the Hypothesis Analyst role |
-| S4 evidence investigation | `core/workflows/04-evidence-investigation.md` | Director or the Evidence seat |
-| S5 blind adversarial review | `core/workflows/05-adversarial-review.md` | Director adjudicating the Red Team |
-| S6 synthesis, update, stop | `core/workflows/06-iterative-research.md` | Director or the Synthesis seat |
+| S0–S1 intake and fact base | `$OIR_ROOT/core/workflows/01-research-intake.md` | Director |
+| S2 actor simulation + adjudication | `$OIR_ROOT/core/workflows/02-actor-simulation.md` | Director dispatching actors |
+| S3 hypotheses and predictions | `$OIR_ROOT/core/workflows/03-hypothesis-generation.md` | Director in the Hypothesis Analyst role |
+| S4 evidence investigation | `$OIR_ROOT/core/workflows/04-evidence-investigation.md` | Director or the Evidence seat |
+| S5 blind adversarial review | `$OIR_ROOT/core/workflows/05-adversarial-review.md` | Director adjudicating the Red Team |
+| S6 synthesis, update, stop | `$OIR_ROOT/core/workflows/06-iterative-research.md` | Director or the Synthesis seat |
 
 ## Hard rules
 
@@ -83,19 +87,17 @@ Install locations:
 
 Dispatch each actor seat with the agent/subagent mechanism available in this environment, one fresh unit per seat, passing only the frozen fact snapshot, the actor brief and the schema. Do not run two actors in one context. Record each unit's identifier and an input hash in index.json so the isolation check can verify them.
 
-Verification status (2026-11-13): Installed and executed on the authoring machine. Skill directory scanning, frontmatter parsing and subagent dispatch confirmed in-session.
-
 ## Output
 
-Write state to `research/<slug>/` following `core/CORE_SPEC.md` §5. One JSON file
-per entity, IDs `PREFIX-NNN`. Machine contract in `core/schemas/`, human-readable
-prose in `core/templates/`.
+Write state to `research/<slug>/` following `$OIR_ROOT/core/CORE_SPEC.md` §5. One JSON file
+per entity, IDs `PREFIX-NNN`. Machine contract in `$OIR_ROOT/core/schemas/`,
+human-readable prose in `$OIR_ROOT/core/templates/`.
 
 Before writing the report, run the state validator if a Python runtime is
 available:
 
 ```
-python the repository root containing core/ - resolve it from the skill's own location, or from the installed copy if the repository was cloned alongside/tests/scripts/validate_state.py research/<slug> --check-isolation
+python $OIR_ROOT/tests/scripts/validate_state.py research/<slug> --check-isolation
 ```
 
 Report the result. If the validator could not run, say so rather than implying the

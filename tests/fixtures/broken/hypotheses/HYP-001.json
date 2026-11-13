@@ -1,0 +1,40 @@
+{
+  "id": "HYP-001",
+  "statement": "The delay reflects a fiscal veto by the finance ministry rather than technical difficulty in the programme.",
+  "mechanism": "The programme requires co-signature (FACT-001); the published estimate exceeded the statutory ceiling (FACT-002); the ministry's budget directorate holds the veto and defends the ceiling as a constraint on all programmes; therefore co-signature is withheld until the estimate falls inside the ceiling, and the observable delay is a fiscal artefact.",
+  "scope": {
+    "where": "national programme approval process",
+    "when": "fiscal year 2026",
+    "excludes": [
+      "regional delivery delays after approval"
+    ]
+  },
+  "premises": [
+    "FACT-001",
+    "FACT-002"
+  ],
+  "assumptions": [],
+  "predictions": [
+    "PRD-001"
+  ],
+  "supporting": [
+    "EVD-001"
+  ],
+  "undermining": [],
+  "relation_to_others": [
+    {
+      "hypothesis": "HYP-002",
+      "relation": "contradicts",
+      "note": "HYP-002 attributes the delay to technical review capacity"
+    }
+  ],
+  "status": "live",
+  "status_reason": "One prediction confirmed against a locatable record; no successful attack on the mechanism.",
+  "survived": [
+    "A2 mechanism chain",
+    "A4 independence audit"
+  ],
+  "origin": "actor-model",
+  "created_at": "2026-10-02T10:05:00Z",
+  "confidence": 0.7
+}

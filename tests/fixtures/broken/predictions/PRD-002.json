@@ -1,0 +1,24 @@
+{
+  "id": "PRD-002",
+  "hypothesis": "HYP-002",
+  "observable": "The sponsoring body's legal affairs queue depth and clearance dates.",
+  "indicator": "Internal clearance log entries",
+  "window": {
+    "from": "2026-04-01",
+    "to": "2027-03-31"
+  },
+  "confirm_if": "Clearance took longer than 90 days owing to queue depth",
+  "disconfirm_if": "Clearance completed within 14 days",
+  "counter_indicator": "Clearance log shows no backlog in the relevant period",
+  "separates": [
+    [
+      "HYP-001",
+      "HYP-002"
+    ]
+  ],
+  "strength": "moderate",
+  "registered_at": "2026-10-05T00:00:00Z",
+  "judgement": "confirmed",
+  "judged_at": "2026-10-06T00:00:00Z",
+  "judged_by": "EVD-001"
+}

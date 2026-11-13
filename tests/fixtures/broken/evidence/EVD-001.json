@@ -1,0 +1,31 @@
+{
+  "id": "EVD-001",
+  "description": "The ministry's receipt register records the submission on a date 12 days after the sponsoring body's internal approval, with no subsequent action for 74 days.",
+  "source": [
+    "SRC-002"
+  ],
+  "direction": "supports",
+  "targets": [
+    {
+      "hypothesis": "HYP-001",
+      "weight": "strong"
+    },
+    {
+      "hypothesis": "HYP-002",
+      "weight": "strong"
+    }
+  ],
+  "strength": "moderate",
+  "independence_note": {
+    "effective_independent": 3,
+    "reasoning": "One official register; no independent second record of the same dates was located.",
+    "redundant": false,
+    "root_unknown": false
+  },
+  "alternative_readings": [
+    "The register may record receipt of a covering letter rather than the substantive submission, which would weaken the timing inference.",
+    "A 74-day silence could reflect an unrecorded informal exchange."
+  ],
+  "obtained_by": "INV-001",
+  "obtained_at": "2026-10-03T13:30:00Z"
+}

@@ -13,16 +13,25 @@ Nothing here is marked as passing unless it was actually run. See
 |---|---|---|---|
 | T1 | No empty files | `python tests/scripts/check_structure.py` | Exit 0. The repository must not contain structural filler |
 | T2 | Every `core/` file is platform-independent | same | Exit 0. No product, tool or API names under `core/` |
-| T3 | README index matches the filesystem | same | Exit 0. Every path in the README tree block exists; every required file is present |
-| T4 | No broken relative links | same | Exit 0. Across all Markdown |
+| T3 | README index matches the filesystem | same | Exit 0. Every path in the README tables and tree block exists; every required file is present |
+| T4 | No broken relative links | same | Exit 0. Across all Markdown, including README anchors |
 | T5 | Skill frontmatter is valid | `python tests/scripts/check_skill.py distributions/` | Exit 0. `name` matches directory, `description` ≤1024 chars, has a "use when" clause |
 | T6 | Generated distributions match the template | `python packaging/build.py --check` | Exit 0. No drift |
-| T7 | Schemas are valid JSON Schema | `python tests/scripts/validate_state.py tests/fixtures/good` | Exit 0 |
-| T8 | Validator rejects a broken state | `python tests/scripts/validate_state.py tests/fixtures/broken` | **Exit 1**, and the failure list names each planted defect |
+| T7 | Schemas are valid JSON Schema | `python tests/scripts/validate_state.py tests/fixtures/good` | Exit **0**, and `validate_state` reports the schema layer ran |
+| T8 | Validator rejects a broken state | `python tests/scripts/validate_state.py tests/fixtures/broken` | Exit **1**, and the failure list names each planted defect |
+| T9 | A check that cannot run does not pass | `validate_state.py` with `jsonschema` absent | Exit **3** and `result: INCOMPLETE` — never `0` / `PASS` |
+| T10 | The freeze hash is real | edit one `FACT` statement, keep the hash | Exit 1, `fact_snapshot.hash does not match` |
+| T11 | No path in a package can be prose | `python packaging/build.py` | Exit 0; a `core_root` value containing a space is refused. `check_skill.py` fails on any backticked path containing whitespace, and on an unresolved `{{` placeholder |
 
-T8 is the one that matters. A validator that has never rejected anything is
-untested; the `broken` fixture plants one instance of each rule so the test proves
-the rule fires.
+T8 and T9 are the ones that matter most. A validator that has never rejected anything
+is untested; a validator that reports success after skipping its own checks is worse
+than no validator, because it manufactures confidence. Both were found broken during
+the 2026-11-13 review — see `tests/records/2026-11-13-external-review.md`.
+
+T11 exists because a prose sentence was once substituted into `core_root`, corrupting
+every file path and one shell command in all three packages while `check_skill.py`
+reported `PASS (0 warnings)`. The checker skipped any reference it could not resolve,
+which was all of them.
 
 ## 2. Behavioural — stage gates
 
