@@ -19,5 +19,7 @@ Thumbs.db
 .vscode/
 *.swp
 
-# Scratch downloads during method research; not project data
-.workbuddy/tmp/
+# The agent workspace: scratch downloads, working notes, local memory. Useful
+# locally, noise in a published repository, and one careless `git add -A` away
+# from being committed. Ignored wholesale rather than by subdirectory.
+.workbuddy/
