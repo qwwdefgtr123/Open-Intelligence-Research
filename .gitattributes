@@ -1,0 +1,21 @@
+# Line endings.
+#
+# Normalise to LF in the repository; let each platform check out what it wants.
+# Without this, a Windows working copy with core.autocrlf=true rewrites every file
+# it touches, and every diff shows line-ending noise instead of content. The
+# repository's own rule (core/CORE_SPEC.md §5) is that state files are plain text
+# and their diffs must be readable - a diff that is 100% carriage returns is not.
+* text=auto
+
+*.md     text
+*.json   text
+*.py     text
+*.txt    text
+*.yml    text
+*.yaml   text
+
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
