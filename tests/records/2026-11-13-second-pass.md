@@ -7,7 +7,7 @@ mechanism checked at all** — spec clauses with no schema behind them, document
 asserting behaviour the scripts did not have, a state directory asserting decisions it
 never recorded.
 
-Ten defects. Two were introduced by the previous round's own fixes.
+Eleven defects. Two were introduced by the previous round's own fixes.
 
 ## State and content defects
 
@@ -45,6 +45,18 @@ packages and `CHANGELOG` said 0.1.1.
 (`packaging/platforms.json`) with the README status line as the only manual copy. That
 copy is exactly the thing that drifts, so it is now on the review checklist rather than
 trusted.
+
+### R3b — A stopped run with no recorded uncertainties
+
+Found while fixing R1: the report listed open questions in prose and said "no `UNC`
+entities were raised this run". Workflow 06 makes undecidable questions `UNC` entities,
+and this run had three of them — whether the EUR 9.9bn was disbursed or only pledged,
+Intel's exit cost at Magdeburg, and whether the aid approval lapsed on pause.
+
+Being transparent about a gap is better than hiding it, but it is not the same as
+closing it: the report could describe uncertainties no auditor could check. Three `UNC`
+records now exist, each naming what it would take to resolve it and which hypothesis it
+would move.
 
 ## Spec-versus-implementation drift
 

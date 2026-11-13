@@ -224,7 +224,7 @@ Open-Intelligence-Research/
 | [tests/fixtures/good/index.json](tests/fixtures/good/index.json) | A minimal valid run |
 | [tests/fixtures/make_broken.py](tests/fixtures/make_broken.py) | Generates a fixture with one planted defect per rule |
 
-The example run lives at `research/intel-magdeburg/` — `index.json`, `plan.md`, `facts/`, `sources/`, `actors/`, `simulations/`, `hypotheses/`, `predictions/`, `decisions/`, `iterations/round-01.md`, and `report.md`. It is a conforming run in the narrow sense that every artefact the spec requires is present; it is a weak run in the sense that matters, because no evidence stage executed.
+The example run lives at `research/intel-magdeburg/` — `index.json`, `plan.md`, `facts/`, `sources/`, `actors/`, `simulations/`, `hypotheses/`, `predictions/`, `decisions/`, `uncertainties/`, `iterations/round-01.md`, and `report.md`. It is a conforming run in the narrow sense that every artefact the spec requires is present; it is a weak run in the sense that matters, because no evidence stage executed.
 
 ---
 

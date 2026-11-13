@@ -1,0 +1,10 @@
+{
+  "id": "UNC-003",
+  "question": "Did the Commission's project-specific aid approval lapse when the project paused, or could it be revived by administrative act?",
+  "why_it_matters": "HYP-005 asserts that a pause destroyed the approval and therefore was functionally a cancellation. That is its weakest link; if the approval survived, the hypothesis reduces to a description rather than an explanation.",
+  "would_resolve": "The state aid register entry and any amended decision for the site.",
+  "resolves": [
+    "HYP-005"
+  ],
+  "status": "open"
+}

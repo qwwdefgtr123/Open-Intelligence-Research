@@ -23,6 +23,10 @@ introduced by the 0.1.1 fixes themselves. Full record: `tests/records/2026-11-13
   run stops; the run stopped by S5 and had none. Written now, with every band `weak` and
   the unresolved table full — the honest output for a run that never collected evidence.
 - **Version drift.** README announced v0.1.0 after the packages moved to 0.1.1.
+- **A stopped run with no recorded uncertainties.** The report described its open
+  questions in prose and noted that no `UNC` entities existed. Workflow 06 requires them,
+  and the prose version could not be audited. Three `UNC` records added, each naming what
+  would resolve it and which hypothesis it would move.
 - **A spec clause with no field behind it.** `CORE_SPEC` §4 required `PRD.basis[]` to
   resolve; `prediction.schema.json` has no such property, so the clause could not fail.
   Now covers premises only, with the reason stated.

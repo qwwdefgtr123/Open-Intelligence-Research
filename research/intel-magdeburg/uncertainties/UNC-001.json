@@ -1,0 +1,10 @@
+{
+  "id": "UNC-001",
+  "question": "Was any part of the EUR 9.9bn disbursed to Intel before the September 2024 pause, or was it only pledged?",
+  "why_it_matters": "If disbursed, the finance ministry's reclaim was a recovery rather than a reallocation, and HYP-002's mechanism changes from 'the earmark was always a bookmark' to 'the money left and had to be clawed back'. If only pledged, HYP-002 stands as written.",
+  "would_resolve": "The aid decision text and the federal budget execution report for the vehicle.",
+  "resolves": [
+    "HYP-002"
+  ],
+  "status": "open"
+}

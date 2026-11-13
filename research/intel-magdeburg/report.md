@@ -84,7 +84,7 @@ in Berlin. Both can be true at different causal layers, and neither was disconfi
 | Hypotheses still indistinguishable | HYP-001 vs HYP-002 | PRD-003: the earmark's post-2024 status |
 | Predictions still pending | PRD-001 … PRD-006 | windows close between 2025-07 and 2026-12 |
 | Facts still single-source | FACT-004, FACT-005 | one non-aggregated source; Intel filings |
-| Open uncertainties | no `UNC` entities were raised this run | — |
+| Open uncertainties | `UNC-001` whether the EUR 9.9bn was disbursed or only pledged (would rewrite HYP-002's mechanism) · `UNC-002` Intel's exit cost at Magdeburg (would weaken HYP-001's "deferral was cheap" premise) · `UNC-003` whether the aid approval lapsed on pause (HYP-005's weakest link) | named in each record |
 | Surfaces never tested | every hypothesis, on every surface | a review round (S5) has not happened |
 
 **Stop rule that fired:** S5 (user stop) — the run was a bounded comparison case.

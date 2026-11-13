@@ -1,0 +1,11 @@
+{
+  "id": "UNC-002",
+  "question": "What was Intel's contractual exit cost at Magdeburg, including land, utility and supplier commitments?",
+  "why_it_matters": "HYP-001's mechanism claims deferral was nearly free. If the exit cost was substantial, deferral was not cheap and the sunk-cost ranking that explains the choice loses its force.",
+  "would_resolve": "The state's land-option terms, or investor disclosures on cancellation charges.",
+  "resolves": [
+    "HYP-001",
+    "ACT-001"
+  ],
+  "status": "open"
+}
