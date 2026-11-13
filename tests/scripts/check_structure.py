@@ -30,6 +30,7 @@ REQUIRED = [
     "LICENSE",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
+    "requirements.txt",
     "core/CORE_SPEC.md",
     "core/PRINCIPLES.md",
     "core/workflows/01-research-intake.md",
@@ -67,7 +68,15 @@ PLATFORM_WORDS = [
 ]
 
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 TREE_PATH_RE = re.compile(r"^[│├└─\s]*([\w./-]+\.(?:md|json|py|txt|yaml|yml))\s*(?:#.*)?$")
+
+
+def slug(text: str) -> str:
+    """GitHub heading anchor: lowercase, drop punctuation, spaces to hyphens."""
+    s = text.strip().lower()
+    s = re.sub(r"[^\w\s-]", "", s)
+    return re.sub(r"\s", "-", s.strip())
 
 
 def walk(root: Path):
@@ -110,8 +119,16 @@ def main() -> int:
         if p.suffix != ".md":
             continue
         text = p.read_text(encoding="utf-8")
+        anchors = {slug(m.group(2)) for m in
+                   (HEADING_RE.match(l) for l in text.splitlines()) if m}
         for target in LINK_RE.findall(text):
-            if target.startswith(("http://", "https://", "mailto:", "#")):
+            if target.startswith(("http://", "https://", "mailto:")):
+                continue
+            if target.startswith("#"):
+                if target[1:] not in anchors:
+                    errors.append(f"{rel}: anchor has no matching heading -> {target}")
+                else:
+                    checks += 1
                 continue
             clean = target.split("#")[0].strip()
             if not clean:

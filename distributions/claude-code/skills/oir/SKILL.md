@@ -4,7 +4,7 @@ description: Run a closed-loop research method for questions where several parti
 license: MIT
 compatibility: Requires filesystem access and the Task tool for isolated subagents.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
   upstream: "Open-Intelligence-Research"
 ---
 

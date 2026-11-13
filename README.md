@@ -4,7 +4,7 @@
 
 Not another deep-research summariser. OIR closes a loop: verified facts → separately modelled parties → competing hypotheses → **pre-registered** predictions → evidence chosen because it *separates* them → blind adversarial review → state update → next round.
 
-> **Status: v0.1.0, method complete, effect unproven.** The repository contains a working method, eight machine-checkable schemas, three platform packages, and one executed comparison. That comparison found the single-agent baseline was **not beaten** on decision-usefulness. Read [§ H](#h-security--limitations) before citing this project for anything.
+> **Status: v0.1.2, method complete, effect unproven.** The repository contains a working method, eight machine-checkable schemas, three platform packages, and one executed comparison. That comparison found the single-agent baseline was **not beaten** on decision-usefulness. Read [§ H](#h-security--limitations) before citing this project for anything.
 
 ---
 
@@ -217,13 +217,14 @@ Open-Intelligence-Research/
 | [tests/experiments/README.md](tests/experiments/README.md) | The four-mode comparison protocol, with its controls and limits |
 | [tests/records/2026-11-13-mode-a-vs-b.md](tests/records/2026-11-13-mode-a-vs-b.md) | The one executed comparison, and its uncomfortable result |
 | [tests/records/2026-11-13-external-review.md](tests/records/2026-11-13-external-review.md) | A simulated third-party review of the published repository: nine defects, including four that made a shipped artifact unusable |
+| [tests/records/2026-11-13-second-pass.md](tests/records/2026-11-13-second-pass.md) | The follow-up pass, looking for claims that nothing checked: ten more defects, two of them introduced by the first round of fixes |
 | [tests/scripts/validate_state.py](tests/scripts/validate_state.py) | Schema + cross-reference + prediction timing + independence + isolation |
 | [tests/scripts/check_skill.py](tests/scripts/check_skill.py) | Frontmatter, naming, secret scan, path scan |
 | [tests/scripts/check_structure.py](tests/scripts/check_structure.py) | Empty files, broken links, required files, platform-word scan of `core/` |
 | [tests/fixtures/good/index.json](tests/fixtures/good/index.json) | A minimal valid run |
 | [tests/fixtures/make_broken.py](tests/fixtures/make_broken.py) | Generates a fixture with one planted defect per rule |
 
-The example run lives at `research/intel-magdeburg/` — `index.json`, `plan.md`, `facts/`, `sources/`, `actors/`, `simulations/`, `hypotheses/`, `predictions/`, `iterations/round-01.md`.
+The example run lives at `research/intel-magdeburg/` — `index.json`, `plan.md`, `facts/`, `sources/`, `actors/`, `simulations/`, `hypotheses/`, `predictions/`, `decisions/`, `iterations/round-01.md`, and `report.md`. It is a conforming run in the narrow sense that every artefact the spec requires is present; it is a weak run in the sense that matters, because no evidence stage executed.
 
 ---
 

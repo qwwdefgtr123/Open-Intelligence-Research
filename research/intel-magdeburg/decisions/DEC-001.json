@@ -1,0 +1,12 @@
+{
+  "id": "DEC-001",
+  "kind": "scale",
+  "at": "2026-11-13T01:35:00Z",
+  "rationale": "Standard tier approved before any seat was dispatched: three actor seats, no evidence seat and no red-team seat, because this run is the Mode B arm of a bounded comparison and those stages define Modes C and D. Recorded here so the authorisation is an entity rather than a claim in prose.",
+  "refs": [
+    "ACT-001",
+    "ACT-002",
+    "ACT-003"
+  ],
+  "note": "Actor decomposition justified from facts, not priors: Intel leadership (FACT-001, FACT-003), German federal government (FACT-002, FACT-004), Saxony-Anhalt (FACT-002). The EU Commission was folded into the German party's constraints because it took no independent action inside the window."
+}

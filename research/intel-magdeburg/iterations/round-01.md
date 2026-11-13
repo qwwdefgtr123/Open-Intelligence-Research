@@ -68,7 +68,7 @@ What would move each up one band:
 
 ## Stop decision
 
-`DEC` kind `stop`, rule **S5 (user stop)**: this run was commissioned as a bounded
+`DEC-002`, kind `stop`, rule **S5 (user stop)**: this run was commissioned as a bounded
 comparison case, one round by design. Rules checked and **not** fired: S1 (discrimination is
 nowhere near exhausted — the ranking above is full), S2 (budget: 4 of 13 runs,
 6 of 120 queries), S3 (no-progress cannot be assessed in a one-round run), S4 (the key
@@ -77,3 +77,11 @@ windows are open, not unobservable).
 Recording S5 rather than a substantive rule matters: the run stopped because it was
 told to, not because the question was answered. A report claiming otherwise would be
 the exact failure mode `PRINCIPLES.md` P6 forbids.
+
+Because the run stopped, `report.md` exists. Its bands are all `weak` and it says so
+in the first line — that is the correct output for a run that never collected
+evidence, not a formatting accident.
+
+Scale authorisation is `DEC-001`. Both decisions were missing in v0.1.0 even though
+this file referred to them; they were added after an external review pointed out that
+the run asserted decisions it had not recorded.

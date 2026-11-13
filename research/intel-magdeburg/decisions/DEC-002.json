@@ -1,0 +1,21 @@
+{
+  "id": "DEC-002",
+  "kind": "stop",
+  "at": "2026-11-13T02:45:00Z",
+  "rule_fired": "S5",
+  "rules_checked": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "rationale": "S5 (user stop): the run was commissioned as a bounded comparison case, one round by design. S1 had not fired - the next-round ranking was full. S2 had not fired - 4 of 13 runs and 6 of 120 queries used. S3 cannot be assessed in a one-round run. S4 had not fired - the key observation windows were open, not unobservable. Stopping on S5 rather than a substantive rule is recorded deliberately: the question was not answered, the run was ended.",
+  "refs": [
+    "HYP-001",
+    "HYP-002",
+    "HYP-003",
+    "HYP-004",
+    "HYP-005"
+  ]
+}

@@ -7,6 +7,48 @@ Versioning is [SemVer](https://semver.org/).
 
 Nothing yet.
 
+## [0.1.2] — 2026-11-13
+
+Second review pass, looking for a different failure family than 0.1.1: not mechanisms
+that ran and lied, but **claims that nothing checked at all**. Ten defects, two of them
+introduced by the 0.1.1 fixes themselves. Full record: `tests/records/2026-11-13-second-pass.md`.
+
+### Fixed
+
+- **The example run asserted decisions it never recorded.** `decisions/` was empty while
+  the round record and plan referred to a scale authorisation and a stop decision, all of
+  which `CORE_SPEC` requires as entities. Added `DEC-001` (scale) and `DEC-002` (stop,
+  naming the rule that fired and the four that did not).
+- **The run stopped with no report.** `CORE_SPEC` §5 says `report.md` is written when the
+  run stops; the run stopped by S5 and had none. Written now, with every band `weak` and
+  the unresolved table full — the honest output for a run that never collected evidence.
+- **Version drift.** README announced v0.1.0 after the packages moved to 0.1.1.
+- **A spec clause with no field behind it.** `CORE_SPEC` §4 required `PRD.basis[]` to
+  resolve; `prediction.schema.json` has no such property, so the clause could not fail.
+  Now covers premises only, with the reason stated.
+- **An enforced hash with no documented algorithm.** The `fact_snapshot` recipe is now in
+  `CORE_SPEC` §5 down to sort order and separator, because the validator rejects any other
+  convention.
+- **"Validated by cross-reference checks" was untrue.** The seven prose-led entities were
+  loaded by nothing. The validator now loads `claims/`, `conflicts/`, `assumptions/`,
+  `decisions/`, `uncertainties/` and resolves their references.
+- **The anchor check did not exist.** T4 claimed broken-anchor detection; `#` targets were
+  skipped. Now resolved against each file's headings.
+- **Band vocabulary versus practice.** A band must be one of the five, and may carry a
+  qualifier (`weak, untested`) because `weak` otherwise conflates thin evidence with no
+  evidence.
+- **A stale count in prose.** "118 checks" removed from the comparison record; counts in
+  prose rot and are not evidence.
+- **`requirements.txt` was not registered as required** in `check_structure.py`.
+
+### Verified
+
+All gates re-run from a copy with no `.git` and no prior state: build in sync, skill
+check clean, structure 250 checks, good fixture 63 checks, broken fixture failing on all
+7 planted defects, example run 154 checks. Negative tests confirmed to fail for the right
+reason: broken anchor, dangling `DEC` reference, whitespace-in-path, missing reference
+target, tampered fact against a frozen hash.
+
 ## [0.1.1] — 2026-11-13
 
 Fixes from an external review that simulated a third-party agent fetching the

@@ -140,21 +140,23 @@ Eight of the fifteen have a JSON Schema in `core/schemas/`: `RES`, `FACT`, `SRC`
 — counted, summed, compared across entities — so a malformed value corrupts a
 downstream judgement silently.
 
-The remaining seven are prose-led and validated only by cross-reference checks:
-`CLM` (a statement by a party), `SIM` (the seat's prose), `CFL` (an unresolved
-tension), `ASM` (a premise with a falsifier), `DEC` (a process decision), `UNC` (an
-open question), `ITR` (a round record). Schemas for these would encode one team's
-prose habits rather than a contract, and the cost of a wrong `DEC` is a bad
-paragraph, not a corrupted count.
+The remaining seven are prose-led: they are parsed, and every ID they reference is
+resolved, but no field-level schema is imposed. `CLM` (a statement by a party), `SIM`
+(the seat's prose), `CFL` (an unresolved tension), `ASM` (a premise with a falsifier),
+`DEC` (a process decision), `UNC` (an open question), `ITR` (a round record). A schema
+for these would encode one team's prose habits rather than a contract, and the cost of
+a wrong `DEC` is a bad paragraph, not a corrupted count.
 
 If you find yourself needing to aggregate one of the seven, that is the signal to
 give it a schema — see §12.
 
 ### Three constraints that are enforced, not advised
 
-1. **Fact/inference separation.** `ACT.premises[]`, `HYP.premises[]` and
-   `PRD.basis[]` must reference existing `FACT` or `CLM` IDs. Restating a fact in
-   prose without an ID fails validation.
+1. **Fact/inference separation.** `ACT.premises[]` and `HYP.premises[]` must reference
+   existing `FACT` or `CLM` IDs. Restating a fact in prose without an ID fails
+   validation. Predictions inherit their factual basis through their hypothesis; they
+   carry no premises of their own, so that there is exactly one place to correct when a
+   fact changes.
 2. **No prediction, no hypothesis.** A `HYP` with an empty `predictions[]` cannot
    hold any status above `draft`, and `draft` hypotheses are excluded from
    synthesis.
@@ -223,6 +225,24 @@ Three freezes, each recorded in `index.json`:
 | `fact_snapshot` | List of FACT IDs + hash | A new fact contradicting an existing one |
 | `prediction_set` | List of PRD IDs + `registered_at` | Never. Late predictions are marked `late` |
 | `actor_set` | List of ACT IDs + `simulation_input_hash` each | A model revision (creates ACT v2) |
+
+### Freeze hash recipe
+
+The hash is enforced, so it has to be reproducible by someone who did not write the
+validator. Deterministic, no locale or ordering ambiguity:
+
+```python
+payload = "\n".join(f"{fid}\t{statement}" for fid in sorted(snapshot_ids))
+digest  = hashlib.sha256(payload.encode("utf-8")).hexdigest()   # 64 hex chars
+```
+
+`sorted()` is code-point order, not locale order. `statement` is the verbatim
+`FACT.statement`, not a normalised or trimmed form. `snapshot_ids` is the ID list in
+`fact_snapshot.ids`, not "all facts that happen to exist".
+
+A mismatch means one of two things, and the choice is not the tool's to make: a fact
+was edited after the freeze (a defect), or the snapshot was intentionally revised (bump
+`version`, record a `DEC` of kind `fact-revision`, then recompute).
 
 ---
 
@@ -369,6 +389,12 @@ Four assessment columns, per hypothesis:
 One band, derived from the four, never a replacement for them:
 
 `strong` · `moderate` · `weak` · `doubtful only` · `excluded`
+
+A band may carry a qualifier drawn from the four columns — `weak, untested`,
+`moderate, single-root` — but the band itself must be one of the five. The qualifier is
+there because `weak` covers two very different situations: evidence that was collected
+and came out thin, and no evidence at all. A reader deciding whether to act needs to
+tell those apart, and the band alone cannot.
 
 Each band must state what would move it one step up. A band without a
 "what would change this" sentence is incomplete.

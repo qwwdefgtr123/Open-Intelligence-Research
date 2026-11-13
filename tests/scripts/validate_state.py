@@ -48,6 +48,17 @@ ENTITY_DIRS = {
     "investigations": ("INV", "investigation.schema.json"),
 }
 
+# Prose-led entities: no JSON Schema (see CORE_SPEC §4), but their references must
+# still resolve. Without this they were loaded by nothing, which made the spec's
+# claim that they are "validated by cross-reference checks" untrue.
+EXTRA_DIRS = {
+    "claims": "CLM",
+    "conflicts": "CFL",
+    "assumptions": "ASM",
+    "decisions": "DEC",
+    "uncertainties": "UNC",
+}
+
 ID_RE = re.compile(r"^(FACT|SRC|CLM|ACT|SIM|HYP|PRD|EVD|INV|CFL|ASM|DEC|UNC|ITR)-(\d{3,})$")
 
 
@@ -100,7 +111,11 @@ def load_json(path: Path, rep: Report):
 def collect(root: Path, rep: Report) -> dict[str, dict]:
     """Load every entity, keyed by id."""
     store: dict[str, dict] = {}
-    for folder, (prefix, _schema) in ENTITY_DIRS.items():
+    dirs: dict[str, tuple[str, str | None]] = dict(ENTITY_DIRS)
+    for folder, prefix in EXTRA_DIRS.items():
+        dirs[folder] = (prefix, None)
+
+    for folder, (prefix, _schema) in dirs.items():
         d = root / folder
         if not d.is_dir():
             continue
@@ -120,6 +135,7 @@ def collect(root: Path, rep: Report) -> dict[str, dict]:
                 continue
             obj["__file"] = f"{folder}/{p.name}"
             store[eid] = obj
+            rep.ok()
     return store
 
 
@@ -148,7 +164,7 @@ def validate_schemas(root: Path, store: dict[str, dict], schemas_dir: Path, rep:
             rep.ok()
 
 
-def check_references(store: dict[str, dict], rep: Report) -> None:
+def check_references(store: dict[str, dict], rep: Report, known_res: str | None = None) -> None:
     def refs_of(obj: dict):
         for key, val in obj.items():
             if key.startswith("__") or key == "id":
@@ -174,11 +190,13 @@ def check_references(store: dict[str, dict], rep: Report) -> None:
                 rep.error(f"{eid}: self-reference in {field}")
                 continue
             if target not in store:
-                # CLM/SIM/ASM/CFL/DEC/UNC/ITR have no schema in this validator's scope
-                if target.split("-")[0] in {"FACT", "SRC", "ACT", "HYP", "PRD", "EVD", "INV"}:
-                    rep.error(f"{eid}: {field} references missing {target}")
+                if target.startswith("RES-"):
+                    if target == known_res:
+                        rep.ok()
+                    else:
+                        rep.error(f"{eid}: {field} references {target}, but this run is {known_res or 'unnamed'}")
                 else:
-                    rep.warn(f"{eid}: {field} references {target}, not loaded as a schema-validated entity")
+                    rep.error(f"{eid}: {field} references missing {target}")
             else:
                 rep.ok()
 
@@ -376,7 +394,7 @@ def main() -> int:
     store = collect(root, rep)
     validate_schemas(root, store, schemas_dir, rep)
     check_snapshot_hash(index, store, rep)
-    check_references(store, rep)
+    check_references(store, rep, (index.get("research") or {}).get("id"))
     check_prediction_timing(store, rep)
     check_independence(store, rep)
     check_isolation(index, store, rep, args.check_isolation)
